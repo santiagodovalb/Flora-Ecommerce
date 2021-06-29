@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const db = require('../index');
+const db = require('../db');
 
 class Order extends sequelize.Model {}
 

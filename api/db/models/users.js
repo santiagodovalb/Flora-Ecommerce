@@ -1,4 +1,4 @@
-const sequelize = require('../db');
+const db = require('../db');
 const S = require("sequelize");
 const bcrypt = require("bcrypt");
 
@@ -31,7 +31,7 @@ User.init(
       type: S.STRING,
     },
   },
-  { sequelize, modelName: "users" }
+  { sequelize:db ,timestamps:false, modelName: "users" }
 );
 
 User.addHook("beforeCreate", async (user) => {

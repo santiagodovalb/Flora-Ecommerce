@@ -10,30 +10,27 @@ const User = require("./users");
 
 
 // Relacion de productos
-Products.hasMany(Category,{as:'category'})
+Products.belongsToMany(Category,{through:'product_category'})
 Category.hasMany(Products,{as:'product'})
 
-Products.hasMany(Reviews,{as:'review'})
-Reviews.belongsTo(Products,{as:'product'})
-
-// Products.belongsToMany(Carrito,{as:'carrito'}) 
-Carrito.hasMany(Products,{as:'product'}) //*
-Products.hasMany(Carrito,{as:'carrito'}) //*
+Products.hasMany(Reviews)
 
 //Relaciones de usuarios
 
 User.belongsTo(Rol,{as:'rol'})
 
-User.hasOne(PaymentMethod,{as:'paymentMethod'}) //*
+User.belongsTo(PaymentMethod,{as:'paymentMethod'}) //*
 
 User.hasMany(Reviews,{as:'review'})
 Reviews.belongsTo(User,{as:'user'})
 
 Carrito.belongsTo(User,{as:'user'}) 
-User.hasOne(Carrito,{as:'carrito'}) //?
 
 //Relacion Order
-Order.hasOne(Carrito,{as:'carrito'})
+Order.belongsTo(DeliveryMode, { as: 'deliveryMode' })
+
+Order.belongsTo(Carrito)
+
 
 
 

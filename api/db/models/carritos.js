@@ -1,11 +1,11 @@
-const sequelize = require('../db');
+const db = require('../db');
 const S = require("sequelize");
 
 class Carrito extends S.Model {}
 
 Carrito.init(
   {
-    arrayCarrito: {
+    arrayOfProducts: {
         type: S.ARRAY(S.JSON)
       },
     state: {
@@ -13,7 +13,7 @@ Carrito.init(
       defaultValue:'pending'
     },
   },
-  { sequelize, modelName: "carrito" }
+  { sequelize:db, timestamps:false,modelName: "carrito" }
 );
 
 
