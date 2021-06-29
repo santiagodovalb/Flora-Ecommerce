@@ -5,8 +5,8 @@ class Carrito extends S.Model {}
 
 Carrito.init(
   {
-    count: {
-        type: S.INTEGER
+    arrayCarrito: {
+        type: S.ARRAY(S.JSON)
       },
     state: {
       type: S.STRING,
