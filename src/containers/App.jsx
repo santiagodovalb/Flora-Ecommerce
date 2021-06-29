@@ -8,6 +8,7 @@ import SingleProduct from "../components/SingleProduct";
 import Cart from '../components/Cart';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import Sidebar from "../components/Sidebar";
 import Navbar from '../components/Navbar'
 
 function App() {
@@ -20,12 +21,13 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      {/* <Sidebar /> */}
       <Switch>
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={SingleProduct} />
-        <Route path='/cart/:id' component={Cart} /> 
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
+        <Route path="/cart/:id" component={Cart} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         {/*<Route path='/user/:id' component={UserPage} />
         <Route path='/admin' component={Admin} />*/}
         <Redirect from="*" to="/" />

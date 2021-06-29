@@ -7,18 +7,24 @@ import { useHistory } from 'react-router-dom'
 import "../styles/Login.css";
 
 function Login() {
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
 
-    const [form, setForm] = useState({
-        username: '',
-        password: ''
-    })
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    const handleChange = (e) => {
-        setForm({...form, [e.target.name]: e.target.value})
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // axios y autenticacion
+    dispatch(setUser(form));
+    history.push("/");
+  };
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -44,4 +50,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;
