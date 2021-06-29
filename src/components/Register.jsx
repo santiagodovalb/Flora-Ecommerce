@@ -2,7 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { message } from 'antd'
+import { message } from 'antd';
+import '../styles/Register.css'
 
 function Login() {
 
@@ -14,7 +15,7 @@ function Login() {
         password: ''
     })
 
-    const validate = () => {
+    const validate = (e) => {
         let mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
         if (!form.email.match(mailformat)) {
@@ -35,9 +36,9 @@ function Login() {
     }
 
     return(
-        <div>
+        <div className='register'>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
+            <form className='form' onSubmit={handleSubmit}>
                 <label for='username'>Username</label>
                 <input onChange={handleChange} type='text' name='username' />
                 <label for='email'>Email</label>
@@ -48,7 +49,7 @@ function Login() {
                 <input onChange={handleChange} type='text' name='telefono' />
                 <label for='password'>Password</label>
                 <input onChange={handleChange} type='password' name='username' />
-                <button type='submit' value='submit'>Submit</button>
+                <button className='submit' type='submit' value='submit'>Submit</button>
             </form>
             <Link to='/login'>
                 <h3>Already have an account? Login</h3>
