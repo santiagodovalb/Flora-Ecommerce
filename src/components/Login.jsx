@@ -4,20 +4,27 @@ import { Link } from 'react-router-dom';
 import { setUser } from '../state/user';
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import "../styles/Login.css";
 
 function Login() {
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
 
-    const [form, setForm] = useState({
-        username: '',
-        password: ''
-    })
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    const handleChange = (e) => {
-        setForm({...form, [e.target.name]: e.target.value})
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // axios y autenticacion
+    dispatch(setUser(form));
+    history.push("/");
+  };
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -27,14 +34,14 @@ function Login() {
     }
 
     return(
-        <div>
+        <div className='login'>
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label for='username'>Username</label>
+            <form className='form' onSubmit={handleSubmit}>
+                <label htmlFor='username'>Username</label>
                 <input onChange={handleChange} type='text' name='username' />
-                <label for='password'>Password</label>
+                <label htmlFor='password'>Password</label>
                 <input onChange={handleChange} type='password' name='username' />
-                <button type='submit' value='submit'>Submit</button>
+                <button className='submit' type='submit' value='submit'>Submit</button>
             </form>
             <Link to='/register'>
                 <h3>Don't have an account? Register</h3>
@@ -43,4 +50,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;
