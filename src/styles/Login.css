@@ -1,0 +1,35 @@
+.login {
+    margin-top: 50px;
+}
+
+.login h1 {
+    margin-bottom: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    margin: auto;
+    align-items:stretch;
+    font-weight: bold
+}
+
+.form input {
+    width: 60%;
+    min-width: 50px;
+    margin: 25px  auto;
+    border-radius: 10px;
+}
+
+.form input:focus {
+    outline: none
+}
+
+.submit {
+    color: #a2e0cc;
+    background-color: #237543;
+    width: 30%;
+    border-radius: 5px;
+    margin: 25px auto
+}
