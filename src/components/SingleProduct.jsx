@@ -7,7 +7,7 @@ function SingleProduct() {
 
     return(
         <div>
-            <h1>{id}</h1>
+            <h1>Product {id}</h1>
             <ul>
                 <li>Nombre:</li>
                 <li>Precio:</li>
