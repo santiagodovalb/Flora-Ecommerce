@@ -1,4 +1,4 @@
-const sequelize = require('../db');
+const db = require('../db');
 const S = require("sequelize");
 
 class PaymentMethod extends S.Model {}
@@ -9,7 +9,7 @@ PaymentMethod.init(
       type: S.STRING
     },
   },
-  { sequelize, modelName: "PaymentMethod" }
+  { sequelize: db, timestamps:false,modelName: "PaymentMethod" }
 );
 
 
