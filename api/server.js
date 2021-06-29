@@ -17,8 +17,6 @@ const createServer = () => {
     })
 }
 
-// createApp()
-// createServer()
 
 startDb
 .then(createApp)

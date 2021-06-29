@@ -37,4 +37,4 @@ Order.hasOne(Carrito,{as:'carrito'})
 
 
 
-module.exports={ Carrito, DeliveryMode, Category, Order, PaymentMethod, Products, Reviews, Rol, User}
+module.exports = { Carrito, DeliveryMode, Category, Order, PaymentMethod, Products, Reviews, Rol, User}
