@@ -1,4 +1,4 @@
-const { Products, Category } = require('./models')
+const { Products, Category, Rol } = require('./models')
 
 const categorias = [{ type: 'semillas' }, { type: 'plantas' }, { type: 'herramientas' }, { type: 'arboles' }, { type: 'bonsai' }, { type: 'insumos para cultivos' },{ type: 'flores' },{type:'macetas'},{type:'decoracion'}]
 
@@ -6,7 +6,18 @@ const productos = [{ nombre: 'Semilla de naranjas (x50)', precio: 50, imagen: 'h
 ]
 
 
+const rols = [{type: 'admin'}, {type: 'user'}] 
 
-categorias.forEach(categoria => Category.create(categoria))
 
-productos.forEach(producto=> Products.create(producto))
+const asynfunc = async () => {
+
+    await categorias.forEach(categoria => Category.create(categoria))
+    
+    await productos.forEach(producto=> Products.create(producto))
+    
+    await rols.forEach(rol => Rol.create(rol))
+
+}
+
+asynfunc()
+

@@ -2,4 +2,5 @@
 
 module.exports =  (app) => {
     require('./parsing&loggin.js')(app)
+    require('./authentication.js')(app)
 }
