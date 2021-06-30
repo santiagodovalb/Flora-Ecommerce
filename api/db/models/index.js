@@ -19,7 +19,7 @@ Products.hasMany(Reviews)
 
 User.belongsTo(Rol,{as:'rol'})
 
-User.belongsTo(PaymentMethod,{as:'paymentMethod'}) //*
+// User.belongsTo(PaymentMethod,{as:'paymentMethod'}) 
 
 User.hasMany(Reviews,{as:'review'})
 Reviews.belongsTo(User,{as:'user'})
