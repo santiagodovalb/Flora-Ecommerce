@@ -31,14 +31,17 @@ router.post("/add", async (req, res, next) => {
 router.delete("/:productId", (req, res, next) => {
     Carrito.findOne({ where: { userId: req.user.dataValues.id } })
         .then((carrito) => {
-            const indexDelete = carrito.arrayOfProducts.findIndex(
-                (product) => product.id === req.params.productId
+            const clone=carrito.arrayOfProducts
+            const indexDelete = clone.findIndex(
+                (product) => {
+                    return product.id === parseInt(req.params.productId)
+                }
             );
-            // console.log('INDEX DELETE', indexDelete)
-            carrito.arrayOfProducts.splice(indexDelete, 1);
-            return carrito.save();
+            clone.splice(indexDelete, 1);
+            return carrito.update({...carrito,arrayOfProducts:clone})
+        }).then((carritoUpdated) => {
+            res.status(204).json(carritoUpdated)
         })
-        .then((carritoUpdated) => res.status(204).json(carritoUpdated))
         .catch(next);
 });
 
