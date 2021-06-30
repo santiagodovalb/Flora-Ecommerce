@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "../state/products";
 import Products from "../components/Products";
 import SingleProduct from "../components/SingleProduct";
-import Cart from '../components/Cart';
-import Login from '../components/Login';
-import Register from '../components/Register';
+import Cart from "../components/Cart";
+import Login from "../components/Login";
+import Register from "../components/Register";
 import Sidebar from "../components/Sidebar";
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       {/* <Sidebar /> */}
       <Switch>
-        <Route exact path="/products" component={Products} />
+        <Route exact path="/" component={Products} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart/:id" component={Cart} />
         <Route path="/login" component={Login} />
