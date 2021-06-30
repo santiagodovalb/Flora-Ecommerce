@@ -9,13 +9,6 @@ router.get("/", (req, res, next) => {
         .catch(next);
 });
 
-router.get("/:id", (req, res, next) => {
-    Products.findByPk(req.params.id).then((product) => {
-        res.status(200).json(product)
-    })
-    .catch(next);
-});
-
 router.get('/search', (req, res, next) => {
     Products.findAll({
         where: {
@@ -26,6 +19,15 @@ router.get('/search', (req, res, next) => {
     })
     .catch(next);
 })
+
+router.get("/:id", (req, res, next) => {
+    Products.findByPk(req.params.id)
+        .then((product) => {
+            res.status(200).json(product);
+        })
+        .catch(next);
+});
+
 
 
 //rutas para admins
