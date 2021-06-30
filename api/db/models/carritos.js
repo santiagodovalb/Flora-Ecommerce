@@ -7,11 +7,12 @@ Carrito.init(
   {
     arrayOfProducts: {
       type: S.ARRAY(S.JSON),
+      defaultValue: [],
     },
-    state: {
-      type: S.STRING,
-      defaultValue: "pending",
-    },
+    // state: {
+    //   type: S.STRING,
+    //   defaultValue: "pending",
+    // },
   },
   { sequelize: db, timestamps: false, modelName: "carrito" }
 );
