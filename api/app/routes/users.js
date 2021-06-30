@@ -9,18 +9,15 @@ router.post("/register", (req, res, next) => {
         password: req.body.password,
         direction: req.body.direction,
         phone: req.body.phone,
-        rolId: req.body.rolId,
     }).then((user) => res.status(201).send(user));
 });
 
-router.post(
-    "/login", passport.authenticate("local"),
-    (req, res, next) => {
+router.post("/login", passport.authenticate("local"), (req, res, next) => {
         res.send(req.user);
     }
 );
 
-router.post("logout", (req, res, next) => {
+router.post("/logout", (req, res, next) => {
     req.logOut();
     res.sendStatus(200);
 });

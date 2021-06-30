@@ -50,4 +50,5 @@ module.exports = (app) => {
         .then(user => done(null, user))
     });
  
+
 };
