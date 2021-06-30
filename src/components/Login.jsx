@@ -5,10 +5,12 @@ import { setUser } from "../state/user";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../styles/Login.css";
+import axios from 'axios';
+import { message } from "antd";
 
 function Login() {
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -21,19 +23,26 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axios y autenticacion
-    dispatch(setUser(form));
-    history.push("/");
+    axios.post('http://localhost:3001/api/users/login', form)
+    .then(res => res.data)
+    .then(user =>{
+      dispatch(setUser(user))
+      history.push("/")
+      message.success('Logged in successfully')
+    })
+    .catch(err => {
+      message.error('Bad credentials')
+      return err})
   };
 
   return (
     <div className="login">
       <h1>Login</h1>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input onChange={handleChange} type="text" name="username" />
+        <label htmlFor="email">Email</label>
+        <input onChange={handleChange} type="text" name="email" />
         <label htmlFor="password">Password</label>
-        <input onChange={handleChange} type="password" name="username" />
+        <input onChange={handleChange} type="password" name="password" />
         <button className="submit" type="submit" value="submit">
           Submit
         </button>
