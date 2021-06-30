@@ -26,13 +26,6 @@ function Login() {
     history.push("/");
   };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        // axios y autenticacion
-        dispatch(setUser(form))
-        history.push('/')
-    }
-
     return(
         <div className='login'>
             <h1>Login</h1>
