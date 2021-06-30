@@ -1,4 +1,4 @@
-const sequelize = require('../db');
+const db = require('../db');
 const S = require("sequelize");
 
 class Category extends S.Model {}
@@ -9,7 +9,7 @@ Category.init(
       type: S.STRING
     },
   },
-  { sequelize, modelName: "Category" }
+  { sequelize:db, timestamps:false,modelName: "Category" }
 );
 
 

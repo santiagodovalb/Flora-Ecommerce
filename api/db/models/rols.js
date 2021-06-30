@@ -1,4 +1,4 @@
-const sequelize = require('../db');
+const db = require('../db');
 const S = require("sequelize");
 
 class Rol extends S.Model {}
@@ -9,7 +9,7 @@ Rol.init(
       type: S.STRING
     },
   },
-  { sequelize, modelName: "Rol" }
+  { sequelize: db,timestamps:false, modelName: "Rol" }
 );
 
 
