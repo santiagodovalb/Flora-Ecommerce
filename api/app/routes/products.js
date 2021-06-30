@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
-router.remove('/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     Products.findByPk(req.params.id).then(product => {
         return product.destroy()
     }).then(promiseDestroy => res.status(204).send(promiseDestroy))
@@ -58,4 +58,6 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 })
 
+
+module.exports = router;
 
