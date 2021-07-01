@@ -12,6 +12,8 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { useSelector } from 'react-redux'
 import Search from '../components/Search'
+import axios from 'axios';
+import { setUser } from '../state/user'
 
 function App() {
 
