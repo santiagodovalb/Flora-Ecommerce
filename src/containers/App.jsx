@@ -26,7 +26,6 @@ function App() {
       .get("/api/users/me")
       .then((res) => res.data)
       .then((user) => {
-        console.log("user", user);
         dispatch(setUser(user));
       })
       .catch((err) => {
@@ -44,7 +43,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={() => <Products products={products} />} />
         <Route path="/products/:id" component={SingleProduct} />
-        <Route path="/cart/:id" component={Cart} />
+        <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/search/:search" component={Search} />

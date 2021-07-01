@@ -1,15 +1,18 @@
+import axios from "axios";
 import React from "react";
 import "../styles/Card.css";
+import { message }from 'antd'
 
 export default function Card({ product }) {
-  return (
-    // <div className="cardDiv">
-    //   <h1>{product.nombre}</h1>
-    //   <img src={product.imagen} alt={product.nombre} />
-    //   <h3>Precio: {product.precio}</h3>
-    //   <h3>Stock: {product.stock}</h3>
-    // </div>
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    axios.post('/api/shop/add', product)
+    .then(() => message.success('Product added'))
+    .catch(err => message.error('Unable to add'))
+  }
+
+  return (
     <div className="wrapper">
       <div className="product-img">
         <img src={product.imagen} alt={product.nombre} />
@@ -24,7 +27,7 @@ export default function Card({ product }) {
           <p>
             <span>{product.precio}</span>$
           </p>
-          <button type="button">Agregar al carrito</button>
+          <button onClick={handleClick} type="button">Agregar al carrito</button>
         </div>
       </div>
     </div>

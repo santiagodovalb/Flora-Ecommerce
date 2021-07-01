@@ -22,11 +22,10 @@ function Navbar() {
   }
 
   const user = useSelector(state => state.user)
-
   return (
     <div className="topnav">
       <Link to='/'>
-      <img className="logo" src="https://i.imgur.com/yFqKvGU.png" alt="logo" />
+      <img className="logo" src="https://i.imgur.com/fmEwXEc.png" alt="logo" />
       </Link>
       <div className="search">
       <form onSubmit={handleSubmit}>
@@ -73,7 +72,7 @@ function Navbar() {
           <h3>- {user.nick}</h3>
         </Link>}
 
-        <Link to="/cart/:id">
+        <Link to={`/cart`}>
         <img
           className="png"
           src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"

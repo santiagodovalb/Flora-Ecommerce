@@ -7,7 +7,10 @@ import "../styles/Products.css";
 function Products({ products }) {
   return (
     <div>
-      <h1 className="productsTitle">Our Products</h1>
+      <div className='logoTitle'>
+        <img src="https://i.imgur.com/dUtQOFT.png" alt="logo" />
+        <h1 className="productsTitle">Our Products</h1>
+      </div>
       <div className="productDiv">
         {products.map((product) => {
           return (

@@ -15,6 +15,18 @@
 
 .productsTitle {
   font-size: 45px;
-  margin: 30px auto;
   font-family: "Playfair Display", serif;
+}
+
+.logoTitle {
+  display: flex;
+  flex-direction: row;
+  margin: 50px auto;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 700px;
+}
+
+.logoTitle img {
+  height: 250px;
 }
