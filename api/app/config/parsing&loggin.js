@@ -11,7 +11,7 @@ module.exports = (app) => {
     app.use(helmet())
 
     //Evita problemas con el acceso CORS cuando hacemos peticiones AJAX desde un front a un back con puertos diferentes.
-    // app.use(cors())
+    app.use(cors())
 
     //Permite ver en la consola los request del cliente y los reponses del servidor
     app.use(volleyball)

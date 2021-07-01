@@ -1,16 +1,17 @@
-import React from 'react';
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
-import '../styles/Register.css'
+import React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { message } from "antd";
+import "../styles/Register.css";
+import axios from 'axios';
 
 function Login() {
   const [form, setForm] = useState({
     nick: "",
     email: "",
-    direccion: "",
-    telefono: "",
+    direction: "",
+    phone: "",
     password: "",
   });
 
@@ -42,36 +43,51 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios
-    //   .post("/api/user/", form)
-    //   .then(() => {
-    //     history.push("/login");
-    //     message.success("User created successfully");
-    //   })
-    //   .catch((err) => err);
+    axios
+      .post("http://localhost:3001/api/users/register", form)
+      .then(() => {
+        history.push("/login");
+        message.success("User created successfully");
+      })
+      .catch((err) => {
+        message.error("User not created");
+        return err;
+      });
   };
 
-    return(
-        <div className='register'>
-            <h1>Register</h1>
-            <form className='form' onSubmit={handleSubmit}>
-                <label htmlFor='username'>Username</label>
-                <input onChange={handleChange} type='text' name='username' />
-                <label htmlFor='email'>Email</label>
-                <input onChange={handleChange} onBlur={validate} type='text' name='email' />
-                <label htmlFor='direccion'>Direccion</label>
-                <input onChange={handleChange} type='text' name='direccion' />
-                <label htmlFor='telefono'>Telefono</label>
-                <input onChange={handleChange} type='text' name='telefono' />
-                <label htmlFor='password'>Password</label>
-                <input onBlur={validate} onChange={handleChange} type='password' name='password' />
-                <button className='submit' type='submit' value='submit'>Submit</button>
-            </form>
-            <Link to='/login'>
-                <h3>Already have an account? Login</h3>
-            </Link>
-        </div>
-    )
+  return (
+    <div className="register">
+      <h1>Register</h1>
+      <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="nick">Username</label>
+        <input onChange={handleChange} type="text" name="nick" />
+        <label htmlFor="email">Email</label>
+        <input
+          onChange={handleChange}
+          onBlur={validate}
+          type="text"
+          name="email"
+        />
+        <label htmlFor="direction">Direction</label>
+        <input onChange={handleChange} type="text" name="direction" />
+        <label htmlFor="phone">Phone</label>
+        <input onChange={handleChange} type="text" name="phone" />
+        <label htmlFor="password">Password</label>
+        <input
+          onBlur={validate}
+          onChange={handleChange}
+          type="password"
+          name="password"
+        />
+        <button className="submit" type="submit" value="submit">
+          Submit
+        </button>
+      </form>
+      <Link to="/login">
+        <h3>Already have an account? Login</h3>
+      </Link>
+    </div>
+  );
 }
 
 export default Login;

@@ -10,6 +10,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/search", (req, res, next) => {
+  console.log('QUERY', req.query)
   Products.findAll({
     where: {
       nombre: req.query.nombre,
@@ -38,8 +39,6 @@ router.post("/", (req, res, next) => {
     })
     .catch(next)
 })
-
-
 
 router.delete("/:id", (req, res, next) => {
   Products.findByPk(req.params.id)
