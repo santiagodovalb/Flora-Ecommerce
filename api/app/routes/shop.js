@@ -1,12 +1,11 @@
 const router = require("express").Router();
-const { Carrito, Products } = require("../../db/models");
-
+const { Carrito, Products, Order } = require("../../db/models");
 
 //traigo todos los carritos de un usuario
 router.get("/", (req, res, next) => {
     Carrito.findAll({
-        where: { userId: req.user.dataValues.id  },
-        include: Products
+        where: { userId: req.user.dataValues.id },
+        include: Products,
     })
         .then((Carritos) => {
             res.status(200).json(Carritos);
@@ -35,7 +34,7 @@ router.post("/add", async (req, res, next) => {
     }
 });
 
-router.delete("/:productId", async (req, res, next) => {
+router.delete("/:ProductId", async (req, res, next) => {
     try {
         const { ProductId } = req.params;
         const userId = req.user.dataValues.id;
@@ -46,11 +45,33 @@ router.delete("/:productId", async (req, res, next) => {
     }
 });
 
+router.post("/order", async (req, res, next) => {
 
-// router.post('/order', async (req,res,next) => {
-//     const userId = req.user.dataValues.id;
-//     const carritos = await Carrito.findAll({ where: userId });
-// })
+    const userId = req.user.dataValues.id;
+    const carritos = await Carrito.findAll({ where: userId });
+    let obj = {};
+    let total = 0;
+    console.log(carritos)
+    carritos.forEach(async (carrito) => {
+        const prod = await Products.findByPk(carrito.ProductId);
+        console.log(prod)
+        total += prod.precio * carrito.cantidad;
+        console.log('TOTAL',total)
+        console.log('STOCK', carrito.cantidad)
+        await prod.decrement("stock", { by: carrito.cantidad });
+        console.log("STOCKDESPUES", carrito.cantidad);
+        await prod.save();
+        obj = { ...obj, product: carrito.Product, cantidad: carrito.cantidad };
+    });
+
+    const orden = await Order.create({
+        total: total,
+        carrito: [obj],
+    });
+    console.log('ORDER', orden)
+    res.status(201).json(orden)
+
+});
 
 module.exports = router;
 

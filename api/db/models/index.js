@@ -28,9 +28,10 @@ Carrito.belongsTo(User,{as:'user'})
 Carrito.belongsTo(Products);
 
 //Relacion Order
-Order.belongsTo(DeliveryMode, { as: 'deliveryMode' })
+// Order.belongsTo(DeliveryMode, { as: 'deliveryMode' })
 
-Order.belongsTo(Carrito)
+// Order.belongsTo(Carrito);
+Order.belongsTo(User);
 
 
 
