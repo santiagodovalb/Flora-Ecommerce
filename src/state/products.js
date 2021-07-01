@@ -3,7 +3,7 @@ import axios from "axios";
 
 const setProducts = createAsyncThunk("SET_PRODUCTS", () => {
   return axios
-    .get("http://localhost:3001/api/products")
+    .get("/api/products")
     .then((res) => res.data);
 });
 

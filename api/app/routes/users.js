@@ -19,8 +19,8 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
 });
 
 router.post("/logout", (req, res, next) => {
-    req.logOut();
-    res.sendStatus(200);
+  req.logOut();
+  res.sendStatus(200);
 });
 
 router.put("/edit/:id", (req, res, next) => {
@@ -32,8 +32,9 @@ router.put("/edit/:id", (req, res, next) => {
 });
 
 router.get("/me", (req, res, next) => {
-    if (!req.user) return res.sendStatus(401);
-    return res.send(req.user);
+  console.log(req.user);
+  if (!req.user) return res.sendStatus(401);
+  return res.send(req.user);
 });
 
 //rutas para admins
