@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/SingleProduct.css";
-import Reviews from '../components/Reviews'
+import Reviews from "../components/Reviews";
 
 function SingleProduct() {
   const [product, setProduct] = useState({});
@@ -12,7 +12,7 @@ function SingleProduct() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/products/${id}`)
+      .get(`/api/products/${id}`)
       .then((res) => res.data)
       .then((product) => {
         setProduct(product);
