@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 import Card from "./Card";
 import "../styles/Products.css";
 
-function Products() {
-  const products = useSelector((state) => state.products);
+function Products({ products }) {
 
   return (
     <div>
-      <h1>Products</h1>
+      <h1 className="productsTitle">Our Products</h1>
       <div className="productDiv">
         {products.map((product) => {
           return (
