@@ -10,6 +10,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/search", (req, res, next) => {
+  console.log('QUERY', req.query)
   Products.findAll({
     where: {
       nombre: req.query.nombre,

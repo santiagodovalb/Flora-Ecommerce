@@ -24,7 +24,10 @@ router.post("/add", async (req, res, next) => {
         await carrito.save();
         if (created) res.status(201).json(carrito);
         res.status(200).json(carrito);
+<<<<<<< HEAD
         console.log(carrito.arrayOfProducts);
+=======
+>>>>>>> 6fbc61a6e1a777e7ebfa60e4b37cee6b51823e72
     } catch (err) {
         next(err);
     }
@@ -34,6 +37,7 @@ router.post("/add", async (req, res, next) => {
 router.delete("/:productId", (req, res, next) => {
     Carrito.findOne({ where: { userId: req.user.dataValues.id } })
         .then((carrito) => {
+<<<<<<< HEAD
             const indexDelete = carrito.arrayOfProducts.findIndex(
                 (product) => product.id === req.params.productId
             );
@@ -44,5 +48,21 @@ router.delete("/:productId", (req, res, next) => {
         .then((carritoUpdated) => res.status(204).json(carritoUpdated))
         .catch(next);
 });
+=======
+            const clone=carrito.arrayOfProducts
+            const indexDelete = clone.findIndex(
+                (product) => {
+                    return product.id === parseInt(req.params.productId)
+                }
+            );
+            clone.splice(indexDelete, 1);
+            return carrito.update({...carrito,arrayOfProducts:clone})
+        }).then((carritoUpdated) => {
+            res.status(204).json(carritoUpdated)
+        })
+        .catch(next);
+});
+
+>>>>>>> 6fbc61a6e1a777e7ebfa60e4b37cee6b51823e72
 
 module.exports = router;
