@@ -39,17 +39,6 @@ router.post("/", (req, res, next) => {
     .catch(next)
 })
 
-<<<<<<< HEAD
-router.delete('/:id', (req, res, next) => {
-    Products.findByPk(req.params.id).then(product => {
-        return product.destroy()
-    }).then(promiseDestroy => res.status(204).send(promiseDestroy))
-    .catch(next)
-})
-=======
->>>>>>> 4a06059dc7f704f32487be4f683b6f2e7699b089
-
-
 router.delete("/:id", (req, res, next) => {
   Products.findByPk(req.params.id)
     .then((product) => {
@@ -59,8 +48,6 @@ router.delete("/:id", (req, res, next) => {
     .catch(next);
 });
 
-<<<<<<< HEAD
-=======
 router.put("/:id", (req, res, next) => {
   const { nombre, precio, imagen, descripcion } = req.body;
   Products.findByPk(req.params.id)
@@ -75,5 +62,4 @@ router.put("/:id", (req, res, next) => {
     .catch(next);
 });
 
->>>>>>> 4a06059dc7f704f32487be4f683b6f2e7699b089
 module.exports = router;
