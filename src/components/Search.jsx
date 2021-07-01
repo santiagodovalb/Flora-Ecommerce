@@ -1,25 +1,25 @@
-import React from 'react'
+import React from "react";
 import Products from "../components/Products";
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Search() {
+  const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([])
-    
-    const { search } = useParams();
+  const { search } = useParams();
 
-    useEffect(() => {
-        console.log('SEARCH', search)
-        axios.get(`http://localhost:3001/api/products/search?nombre=${search}`)
-        .then(res => res.data)
-        .then(prods => setProducts(prods))
-    }, [products])
+  useEffect(() => {
+    console.log('LOG')
+    axios
+      .get(`/api/products/search?nombre=${search}`)
+      .then((res) => res.data)
+      .then((prods) => setProducts(prods));
+  }, []);
 
-    return (
-        <div>
-            <Products products={products} />
-        </div>
-    )
+  return (
+    <div>
+      <Products products={products} />
+    </div>
+  );
 }

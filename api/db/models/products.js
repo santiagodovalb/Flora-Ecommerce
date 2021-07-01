@@ -13,4 +13,6 @@ Products.init(
     }, { sequelize: db, timestamps:false ,modelName: 'Product'}
 )
 
+
+
 module.exports = Products;
