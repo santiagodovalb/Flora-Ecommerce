@@ -10,40 +10,59 @@ router.get("/", (req, res, next) => {
         .catch(next);
 });
 
-//AGERGO un nuevo objeto al carrito o lo CREO si ya existe
+//AGERGO un nuevo objeto al carrito o lo CREO si no existe
 router.post("/add", async (req, res, next) => {
     try {
-        const product = req.body;
+        const product = req.body.product;
+        const cantidad = req.body.cantidad
         const userId = req.user.dataValues.id;
+
         const [carrito, created] = await Carrito.findOrCreate({
             where: { userId },
         });
-        carrito.arrayOfProducts = [...carrito.arrayOfProducts, product];
+
+        const indexProduct = carrito.arrayOfProducts.findIndex(element => {
+            return element.product.id === parseInt(product.id)
+        })
+    
+        if (indexProduct >= 0) {
+            carrito.arrayOfProducts[indexProduct].cantidad += cantidad
+        } else {
+            carrito.arrayOfProducts = [...carrito.arrayOfProducts, { product, cantidad }];
+        }
+
         await carrito.save();
+        
+        
         if (created) res.status(201).json(carrito);
+
         res.status(200).json(carrito);
+
     } catch (err) {
         next(err);
     }
 });
 
 //ELIMINO un producto
-router.delete("/:productId", (req, res, next) => {
+router.put("/:productId", (req, res, next) => {
     Carrito.findOne({ where: { userId: req.user.dataValues.id } })
-        .then((carrito) => {
-            const clone=carrito.arrayOfProducts
-            const indexDelete = clone.findIndex(
+        .then(async (carrito) => {
+            const indexDelete = carrito.arrayOfProducts.findIndex(
                 (product) => {
                     return product.id === parseInt(req.params.productId)
                 }
             );
-            clone.splice(indexDelete, 1);
-            return carrito.update({...carrito,arrayOfProducts:clone})
-        }).then((carritoUpdated) => {
-            res.status(204).json(carritoUpdated)
+            const newcarrito = carrito.arrayOfProducts.splice(indexDelete, 1);
+            
+            carrito.arrayOfProducts = [...newcarrito]
+            await carrito.save()
+            res.sendStatus(204)
         })
         .catch(next);
 });
+
+
+//
 
 
 module.exports = router;
