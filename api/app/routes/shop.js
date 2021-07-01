@@ -46,13 +46,13 @@ router.delete("/:ProductId", async (req, res, next) => {
 });
 
 router.post("/order", async (req, res, next) => {
-
+try {
     const userId = req.user.dataValues.id;
     const carritos = await Carrito.findAll({ where: userId });
     let obj = {};
     let total = 0;
-    console.log(carritos)
     carritos.forEach(async (carrito) => {
+        console.log(carrito)
         const prod = await Products.findByPk(carrito.ProductId);
         console.log(prod)
         total += prod.precio * carrito.cantidad;
@@ -61,47 +61,49 @@ router.post("/order", async (req, res, next) => {
         await prod.decrement("stock", { by: carrito.cantidad });
         console.log("STOCKDESPUES", carrito.cantidad);
         await prod.save();
-        obj = { ...obj, product: carrito.Product, cantidad: carrito.cantidad };
-    });
+        obj = { ...obj, product: prod, cantidad: carrito.cantidad };
+        console.log('OBJ', obj)
+    })
 
+    console.log('TOTAL AFU', total)
     const orden = await Order.create({
         total: total,
         carrito: [obj],
     });
     console.log('ORDER', orden)
     res.status(201).json(orden)
+    } catch(err) {
+        next(err)
+    }
 
 });
 
 module.exports = router;
 
-// router.post("/add", async (req, res, next) => {
+// router.post("/order2", async (req, res, next) => {
 //     try {
-//         const product = req.body;
 //         const userId = req.user.dataValues.id;
-//         const [carrito, created] = await Carrito.findOrCreate({
-//             where: { userId },
+//         const carritos = await Carrito.findAll({ where: userId });
+//         let obj = {};
+//         let total = 0;
+//         carritos.forEach( (carrito) => {
+//             Products.findByPk(carrito.ProductId).then(prod => {
+//                total += prod.precio * carrito.cantidad;
+//                prod.decrement("stock", { by: carrito.cantidad });
+//                prod.save();
+//                obj = { ...obj, product: prod, cantidad: carrito.cantidad };
+//             })
+            
 //         });
-//         carrito.arrayOfProducts = [...carrito.arrayOfProducts, product];
-//         await carrito.save();
-//         if (created) res.status(201).json(carrito);
-//         res.status(200).json(carrito);
-//         console.log(carrito.arrayOfProducts);
+
+//         console.log("TOTAL AFU", total);
+//         const orden = await Order.create({
+//             total: total,
+//             carrito: [obj],
+//         });
+//         console.log("ORDER", orden);
+//         res.status(201).json(orden);
 //     } catch (err) {
 //         next(err);
 //     }
-// });
-
-// router.delete("/:productId", (req, res, next) => {
-//     Carrito.findOne({ where: { userId: req.user.dataValues.id } })
-//         .then((carrito) => {
-//             const indexDelete = carrito.arrayOfProducts.findIndex(
-//                 (product) => product.id === req.params.productId
-//             );
-//             // console.log('INDEX DELETE', indexDelete)
-//             carrito.arrayOfProducts.splice(indexDelete, 1);
-//             return carrito.save();
-//         })
-//         .then((carritoUpdated) => res.status(204).json(carritoUpdated))
-//         .catch(next);
 // });
