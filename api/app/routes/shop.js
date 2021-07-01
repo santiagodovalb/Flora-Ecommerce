@@ -1,11 +1,12 @@
 const router = require("express").Router();
-const { Carrito } = require("../../db/models");
+const { Carrito, Products } = require("../../db/models");
+
 
 //traigo todos los carritos de un usuario
 router.get("/", (req, res, next) => {
     Carrito.findAll({
         where: { userId: req.user.dataValues.id  },
-        include: 'products'
+        include: Products
     })
         .then((Carritos) => {
             res.status(200).json(Carritos);
@@ -15,11 +16,11 @@ router.get("/", (req, res, next) => {
 
 router.post("/add", async (req, res, next) => {
     try {
-        const { productId, cantidad } = req.body;
+        const { ProductId, cantidad } = req.body;
         const userId = req.user.dataValues.id;
 
         const [carrito, created] = await Carrito.findOrCreate({
-            where: { userId, productId },
+            where: { userId, ProductId },
             defaults: {
                 cantidad,
             },
@@ -36,14 +37,20 @@ router.post("/add", async (req, res, next) => {
 
 router.delete("/:productId", async (req, res, next) => {
     try {
-        const { productId } = req.params;
+        const { ProductId } = req.params;
         const userId = req.user.dataValues.id;
-        await Carrito.destroy({ where: { userId, productId } });
+        await Carrito.destroy({ where: { userId, ProductId } });
         res.sendStatus(204);
     } catch (err) {
         next(err);
     }
 });
+
+
+// router.post('/order', async (req,res,next) => {
+//     const userId = req.user.dataValues.id;
+//     const carritos = await Carrito.findAll({ where: userId });
+// })
 
 module.exports = router;
 

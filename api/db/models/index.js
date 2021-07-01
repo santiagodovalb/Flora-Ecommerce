@@ -25,7 +25,7 @@ User.hasMany(Reviews,{as:'review'})
 Reviews.belongsTo(User,{as:'user'})
 
 Carrito.belongsTo(User,{as:'user'}) 
-Carrito.belongsTo(Products, {as:'product'});
+Carrito.belongsTo(Products);
 
 //Relacion Order
 Order.belongsTo(DeliveryMode, { as: 'deliveryMode' })
