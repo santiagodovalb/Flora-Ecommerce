@@ -27,39 +27,13 @@ router.post("/add", async (req, res, next) => {
 
         if (!created) carrito.cantidad += cantidad;
         await carrito.save();
-<<<<<<< HEAD
-        if (created) res.status(201).json(carrito);
-        res.status(200).json(carrito);
-=======
 
         res.status(201).json(carrito);
->>>>>>> 7d25501cc5f8e89a618d249c09f1ed2f06a49352
     } catch (err) {
         next(err);
     }
 });
 
-<<<<<<< HEAD
-//ELIMINO un producto
-router.delete("/:productId", (req, res, next) => {
-    Carrito.findOne({ where: { userId: req.user.dataValues.id } })
-        .then((carrito) => {
-            const clone=carrito.arrayOfProducts
-            const indexDelete = clone.findIndex(
-                (product) => {
-                    return product.id === parseInt(req.params.productId)
-                }
-            );
-            clone.splice(indexDelete, 1);
-            return carrito.update({...carrito,arrayOfProducts:clone})
-        }).then((carritoUpdated) => {
-            res.status(204).json(carritoUpdated)
-        })
-        .catch(next);
-});
-
-
-=======
 router.delete("/:productId", async (req, res, next) => {
     try {
         const { productId } = req.params;
@@ -71,7 +45,6 @@ router.delete("/:productId", async (req, res, next) => {
     }
 });
 
->>>>>>> 7d25501cc5f8e89a618d249c09f1ed2f06a49352
 module.exports = router;
 
 // router.post("/add", async (req, res, next) => {
