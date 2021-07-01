@@ -36,29 +36,25 @@ router.post("/", (req, res, next) => {
     .then((product) => {
       res.status(201).json(product);
     })
-    .catch(next);
-});
+    .catch(next)
+})
 
-router.delete("/:id", (req, res, next) => {
-  Products.findByPk(req.params.id)
-    .then((product) => {
-      return product.destroy();
-    })
-    .then((promiseDestroy) => res.status(204).send(promiseDestroy))
-    .catch(next);
-});
+router.delete('/:id', (req, res, next) => {
+    Products.findByPk(req.params.id).then(product => {
+        return product.destroy()
+    }).then(promiseDestroy => res.status(204).send(promiseDestroy))
+    .catch(next)
+})
 
-router.put("/:id", (req, res, next) => {
-  const { nombre, precio, imagen, descripcion } = req.body;
-  Products.findByPk(req.params.id)
-    .then((product) => {
-      product.nombre = nombre;
-      product.precio = precio;
-      product.imagen = imagen;
-      product.descripcion = descripcion;
-      return product.save();
-    })
-    .then((productSave) => res.status(204).send(productSave))
+router.put('/:id', (req, res, next) => {
+    const {nombre, precio, imagen, descripcion} = req.body
+    Products.findByPk(req.params.id).then(product => {
+        product.nombre = nombre;
+        product.precio = precio;
+        product.imagen = imagen;
+        product.descripcion = descripcion;
+        return product.save()
+    }).then(productSave => res.status(204).send(productSave))
     .catch(next);
 });
 
