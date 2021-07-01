@@ -72,6 +72,15 @@ function Navbar() {
           <h3>- {user.nick}</h3>
         </Link>}
 
+        {user.nick && <Link to="/logout">
+        <img
+          className="png"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          alt="searchImg"
+        />
+          <h3>- Log out</h3>
+        </Link>}
+
         <Link to={`/cart`}>
         <img
           className="png"

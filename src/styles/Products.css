@@ -1,14 +1,13 @@
 .productDiv {
   width: 80%;
-  /* display: flex;
+  /* display: grid;
+  grid-template-columns: 33% 33% 33%;
+  row-gap: 5em;
+  column-gap: 1.5em; */
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: auto; */
-  display: grid;
-  grid-template-columns: auto auto auto;
-  row-gap: 5em;
-  column-gap: 1.5em;
+  justify-content: center;
   margin: auto;
   padding-bottom: 35px;
 }
@@ -29,4 +28,15 @@
 
 .logoTitle img {
   height: 250px;
+}
+
+.eachProduct {
+  width: 30%;
+  margin: 15px 15px;
+}
+
+.products hr {
+  width: 80%;
+  border: 1px solid #474747;
+  margin-top: -20px;
 }

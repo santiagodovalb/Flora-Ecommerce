@@ -7,7 +7,7 @@ export default function Card({ product }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/api/shop/add', product)
+    axios.post('/api/shop/add', {ProductId: product.id, cantidad: 1})
     .then(() => message.success('Product added'))
     .catch(err => message.error('Unable to add'))
   }

@@ -7,7 +7,7 @@ const setCart = createAsyncThunk("SET_CART", () => {
     .then((res) => res.data);
 });
 
-const cartReducer = createReducer({arrayOfProducts: []}, {
+const cartReducer = createReducer([], {
   [setCart.fulfilled]: (state, action) => action.payload,
 });
 
