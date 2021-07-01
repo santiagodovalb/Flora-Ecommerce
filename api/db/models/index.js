@@ -25,11 +25,14 @@ User.hasMany(Reviews,{as:'review'})
 Reviews.belongsTo(User,{as:'user'})
 
 Carrito.belongsTo(User,{as:'user'}) 
+Carrito.belongsTo(Products, {as:'product'});
 
 //Relacion Order
 Order.belongsTo(DeliveryMode, { as: 'deliveryMode' })
 
 Order.belongsTo(Carrito)
+
+
 
 
 

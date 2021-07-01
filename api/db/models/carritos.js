@@ -5,9 +5,8 @@ class Carrito extends S.Model {}
 
 Carrito.init(
   {
-    arrayOfProducts: {
-      type: S.ARRAY(S.JSON),
-      defaultValue: [],
+    cantidad: {
+      type: S.INTEGER,
     },
     // state: {
     //   type: S.STRING,
