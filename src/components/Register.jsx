@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { message } from "antd";
 import "../styles/Register.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Login() {
   const [form, setForm] = useState({
@@ -44,7 +44,7 @@ function Login() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/api/users/register", form)
+      .post("/api/users/register", form)
       .then(() => {
         history.push("/login");
         message.success("User created successfully");

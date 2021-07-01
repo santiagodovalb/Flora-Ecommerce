@@ -5,7 +5,7 @@ import { setUser } from "../state/user";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../styles/Login.css";
-import axios from 'axios';
+import axios from "axios";
 import { message } from "antd";
 
 function Login() {
@@ -23,16 +23,18 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/api/users/login', form)
-    .then(res => res.data)
-    .then(user =>{
-      dispatch(setUser(user))
-      history.push("/")
-      message.success('Logged in successfully')
-    })
-    .catch(err => {
-      message.error('Bad credentials')
-      return err})
+    axios
+      .post("/api/users/login", form)
+      .then((res) => res.data)
+      .then((user) => {
+        dispatch(setUser(user));
+        history.push("/");
+        message.success("Logged in successfully");
+      })
+      .catch((err) => {
+        message.error("Bad credentials");
+        return err;
+      });
   };
 
   return (

@@ -10,17 +10,29 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { useSelector } from 'react-redux'
-import Search from '../components/Search'
-import axios from 'axios';
-import { setUser } from '../state/user'
+import { useSelector } from "react-redux";
+import Search from "../components/Search";
+import axios from "axios";
+import { setUser } from "../state/user";
+import { message } from "antd";
 
 function App() {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setProducts());
+
+    axios
+      .get("/api/users/me")
+      .then((res) => res.data)
+      .then((user) => {
+        console.log("user", user);
+        dispatch(setUser(user));
+      })
+      .catch((err) => {
+        console.log("err", err);
+        return err;
+      });
   }, []);
 
   const products = useSelector((state) => state.products);
