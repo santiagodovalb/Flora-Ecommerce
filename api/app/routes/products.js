@@ -40,8 +40,6 @@ router.post("/", (req, res, next) => {
     .catch(next)
 })
 
-
-
 router.delete("/:id", (req, res, next) => {
   Products.findByPk(req.params.id)
     .then((product) => {
