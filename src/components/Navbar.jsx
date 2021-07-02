@@ -3,8 +3,11 @@ import "../styles/Navbar.css";
 import "../assets/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { message } from 'antd'
+import { setUser } from '../state/user'
+import axios from 'axios';
 import navLogo from '../assets/Title.png';
 import userIcon from '../assets/userIcon.png'
 import registerIcon from '../assets/registerIcon.png'
@@ -43,19 +46,12 @@ function Navbar() {
       <Link to='/'>
       <img className="logo" src={navLogo} alt="logo" />
       </Link>
-      <div className="search">
-      <form onSubmit={handleSubmit}>
-        <img
-          className="png"
-          src={lupa}
-          alt="searchImg"
-        />
-      </Link>
+
       <div className="search">
         <form onSubmit={handleSubmit}>
           <img
             className="png"
-            src="https://www.clipartmax.com/png/full/279-2795130_search-magnifying-glass-search-icon-transparent.png"
+            src={lupa}
             alt="searchImg"
           />
 
@@ -68,16 +64,7 @@ function Navbar() {
         </form>
       </div>
       <div className="links">
-        {!user.nick && (
-          <Link to="/login">
-            <img
-              className="png"
-              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-              alt="searchImg"
-            />
-            <h3>- Log in</h3>
-          </Link>
-        )}
+
 
         {!user.nick && <Link to="/login">
         <img
