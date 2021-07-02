@@ -45,6 +45,7 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
+
 router.post("/order", async (req, res, next) => {
 try {
     const userId = req.user.dataValues.id;
@@ -76,6 +77,20 @@ try {
         next(err)
     }
 
+});
+
+router.post("/:ProductId/amount", async (req, res, next) => {
+    const product = req.params.ProductId;
+    const mode = req.body.mode;
+    const usuario = req.user.dataValues.id;
+    const carro = await Carrito.findOne({
+        where: { ProductId: product, userId: usuario },
+    });
+    if (mode === "resta") await carro.decrement("cantidad", { by: 1 });
+    if (mode === "suma") await carro.increment("cantidad", { by: 1 });
+
+    await carro.save();
+    res.status(200).json(carro);
 });
 
 module.exports = router;
