@@ -2,6 +2,7 @@
   display: flex;
   border-radius: 7px 7px 7px 7px;
   box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  border: 2px solid black;
 }
 
 .product-img {
