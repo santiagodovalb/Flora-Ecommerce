@@ -5,6 +5,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import navLogo from '../assets/Title.png';
+import userIcon from '../assets/userIcon.png'
+import registerIcon from '../assets/registerIcon.png'
+import lupa from '../assets/lupa.png'
 
 function Navbar() {
 
@@ -25,13 +29,13 @@ function Navbar() {
   return (
     <div className="topnav">
       <Link to='/'>
-      <img className="logo" src="https://i.imgur.com/fmEwXEc.png" alt="logo" />
+      <img className="logo" src={navLogo} alt="logo" />
       </Link>
       <div className="search">
       <form onSubmit={handleSubmit}>
         <img
           className="png"
-          src="https://www.clipartmax.com/png/full/279-2795130_search-magnifying-glass-search-icon-transparent.png"
+          src={lupa}
           alt="searchImg"
         />
         
@@ -48,7 +52,7 @@ function Navbar() {
         {!user.nick && <Link to="/login">
         <img
           className="png"
-          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          src={userIcon}
           alt="searchImg"
         />
           <h3>- Log in</h3>
@@ -57,7 +61,7 @@ function Navbar() {
         {!user.nick && <Link to="/register">
         <img
           className="png"
-          src="https://freepikpsd.com/media/2019/10/register-icon-png-4-Transparent-Images.png"
+          src={registerIcon}
           alt="searchImg"
         />
           <h3>- Register</h3>
@@ -66,7 +70,7 @@ function Navbar() {
         {user.nick && <Link to="/register">
         <img
           className="png"
-          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          src={userIcon}
           alt="searchImg"
         />
           <h3>- {user.nick}</h3>
