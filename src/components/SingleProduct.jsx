@@ -5,10 +5,13 @@ import axios from "axios";
 import "../styles/SingleProduct.css";
 import Reviews from "../components/Reviews";
 import { message } from 'antd'
+import { useSelector } from 'react-redux'
 
 function SingleProduct() {
 
   const [product, setProduct] = useState({});
+
+  const user = useSelector(state => state.user)
 
   const { id } = useParams();
 
@@ -28,9 +31,17 @@ function SingleProduct() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/api/shop/add', {ProductId: product.id, cantidad: document.getElementById('quantity').value})
-    .then(() => message.success('Product added'))
-    .catch(err => message.error('Unable to add'))
+    if (user.id) {
+      axios.post('/api/shop/add', {ProductId: product.id, cantidad: document.getElementById('quantity').value})
+      .then(() => message.success('Product added'))
+      .catch(err => message.error('Unable to add'))
+    }
+    else {
+      let localProduct = {ProductId: product.id, cantidad: document.getElementById('quantity').value}
+      let storageProducts = window.localStorage.getItem('CART') ? `${window.localStorage.getItem('CART')} AND ${JSON.stringify(localProduct)}` : JSON.stringify(localProduct)
+      window.localStorage.setItem('CART', storageProducts)
+      message.success('Product added')
+    }
   }
 
   return (

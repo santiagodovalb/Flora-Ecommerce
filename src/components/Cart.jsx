@@ -17,7 +17,14 @@ function Cart() {
         dispatch(setCart())
     }, [])
 
-    const user = useSelector(state => state.user)
+    const calcularTotal = () => {
+        let total = 0
+        for (let i = 0; i < cartProducts.length; i++) {
+            total += cartProducts[i].cantidad * cartProducts[i].Product.precio
+        }
+        return total
+    }
+
 
     const handleClear = (id) => {
         axios.delete(`/api/shop/${id}`)
@@ -44,6 +51,7 @@ function Cart() {
                     </div>
                 )
             })}
+            {cartProducts.length ? <h2>Total a pagar: ${calcularTotal()}</h2> : ''}
         </div>
     )
 }

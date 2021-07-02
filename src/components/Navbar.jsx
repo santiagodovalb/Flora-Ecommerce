@@ -104,7 +104,7 @@ function Navbar() {
           </div>
         )}
 
-        <Link to={`/cart`}>
+        <Link to={ user.id ? '/cart' : '/login'}>
           <img
             className="png"
             src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
