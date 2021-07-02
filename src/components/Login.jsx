@@ -31,6 +31,18 @@ function Login() {
         history.push("/");
         message.success("Logged in successfully");
       })
+      .then(() => {
+        if (window.localStorage.getItem("CART")) {
+          const array = window.localStorage
+            .getItem("CART")
+            .split(" AND ")
+            .map((product) => JSON.parse(product));
+            window.localStorage.clear();
+          array.forEach((product) => {
+            axios.post("/api/shop/add", product);
+          });
+        }
+      })
       .catch((err) => {
         message.error("Bad credentials");
         return err;

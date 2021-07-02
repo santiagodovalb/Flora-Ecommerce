@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card from "./Card";
 import "../styles/Products.css";
 import { useLocation } from 'react-router'
+import bodyLogo from '../assets/logo.png'
 
 function Products({ products }) {
 
@@ -12,7 +13,7 @@ function Products({ products }) {
   return (
     <div className='products'>
       <div className='logoTitle'>
-        <img src="https://i.imgur.com/dUtQOFT.png" alt="logo" />
+        <img src={bodyLogo} alt="logo" />
         <h1 className="productsTitle">{ location.pathname === '/' ? 'Our Products' : 'Search results'}</h1>
       </div>
       <hr/>
