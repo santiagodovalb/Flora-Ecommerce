@@ -11,10 +11,10 @@ import registerIcon from '../assets/registerIcon.png'
 import lupa from '../assets/lupa.png'
 
 function Navbar() {
-
   const [search, setSearch] = useState("");
 
-  const history = useHistory()
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -22,10 +22,22 @@ function Navbar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push(`/search/${search}`)
-  }
+    history.push(`/search/${search}`);
+  };
 
-  const user = useSelector(state => state.user)
+  const handleLogout = (e) => {
+    axios
+      .post("/api/users/logout")
+      .then((res) => {
+        message.success("Logout successfully");
+        dispatch(setUser({}));
+        history.push("/");
+        return res;
+      })
+      .catch((err) => err);
+  };
+
+  const user = useSelector((state) => state.user);
   return (
     <div className="topnav">
       <Link to='/'>
@@ -38,16 +50,34 @@ function Navbar() {
           src={lupa}
           alt="searchImg"
         />
-        
+      </Link>
+      <div className="search">
+        <form onSubmit={handleSubmit}>
+          <img
+            className="png"
+            src="https://www.clipartmax.com/png/full/279-2795130_search-magnifying-glass-search-icon-transparent.png"
+            alt="searchImg"
+          />
+
           <input
-          className="searchInput"
-          onChange={handleChange}
-          type="text"
-          placeholder="What are you looking for?"
-        />
+            className="searchInput"
+            onChange={handleChange}
+            type="text"
+            placeholder="What are you looking for?"
+          />
         </form>
       </div>
       <div className="links">
+        {!user.nick && (
+          <Link to="/login">
+            <img
+              className="png"
+              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              alt="searchImg"
+            />
+            <h3>- Log in</h3>
+          </Link>
+        )}
 
         {!user.nick && <Link to="/login">
         <img
@@ -76,21 +106,23 @@ function Navbar() {
           <h3>- {user.nick}</h3>
         </Link>}
 
-        {user.nick && <Link to="/logout">
-        <img
-          className="png"
-          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-          alt="searchImg"
-        />
-          <h3>- Log out</h3>
-        </Link>}
+        {user.nick && (
+          <div onClick={handleLogout} style={{ cursor: "pointer" }}>
+            <img
+              className="png"
+              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              alt="searchImg"
+            />
+            <h3>- Log out</h3>
+          </div>
+        )}
 
         <Link to={`/cart`}>
-        <img
-          className="png"
-          src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
-          alt="searchImg"
-        />
+          <img
+            className="png"
+            src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
+            alt="searchImg"
+          />
           <h3>- My cart</h3>
         </Link>
       </div>
