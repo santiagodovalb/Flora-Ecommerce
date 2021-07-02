@@ -15,6 +15,7 @@ import Search from "../components/Search";
 import axios from "axios";
 import { setUser } from "../state/user";
 import { message } from "antd";
+import User from '../components/User'
 
 function App() {
   const dispatch = useDispatch();
@@ -47,8 +48,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/search/:search" component={Search} />
-        {/*<Route path='/user/:id' component={UserPage} />
-        <Route path='/admin' component={Admin} />*/}
+        <Route path='/user' component={User} />
+        {/*<Route path='/admin' component={Admin} />*/}
         <Redirect from="*" to="/" />
       </Switch>
       {/* <Footer />  */}
