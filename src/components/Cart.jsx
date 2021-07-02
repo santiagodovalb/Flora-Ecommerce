@@ -33,8 +33,30 @@ function Cart() {
             dispatch(setCart())
         })
         .catch(err => message.error('Unable to delete'))
-        
       }
+
+    const handleMore = (product) => {
+        if (product.cantidad < product.Product.stock) {
+            axios.post(`/api/shop/${product.ProductId}/amount`, {
+                mode: 'suma'
+            })
+            .then(() => dispatch(setCart()))
+        }
+        else {
+            message.error('No more stock available')
+        }
+    }
+
+    const handleLess = (product) => {
+        if (product.cantidad === 1) handleClear(product.ProductId)
+        else {
+            axios.post(`/api/shop/${product.ProductId}/amount`, {
+                mode: 'resta'
+            })
+            .then(() => dispatch(setCart()))
+        }
+        
+    }
 
     return(
         <div>
@@ -45,13 +67,15 @@ function Cart() {
                         <Link to={`/products/${product.ProductId}`}>
                         <img src={product.Product.imagen} alt={'imagen de producto'} />
                         </Link>
-                        <h1>{product.Product.nombre}</h1>
-                        <h2>Cantidad: {product.cantidad}</h2>
+                        <h1>{product.Product.nombre} (${product.Product.precio})</h1>
+                        <h2>Cantidad: {product.cantidad} (${product.cantidad * product.Product.precio})</h2>
                         <button onClick={() => handleClear(product.ProductId)} className='clear' type="button">Clear</button>
+                        <button onClick={() => handleMore(product)} className='clear' type="button">+</button>
+                        <button onClick={() => handleLess(product)} className='clear' type="button">-</button>
                     </div>
                 )
             })}
-            {cartProducts.length ? <h2>Total a pagar: ${calcularTotal()}</h2> : ''}
+            {cartProducts.length ? <h2 className='total'>Total a pagar: ${calcularTotal()}</h2> : ''}
         </div>
     )
 }

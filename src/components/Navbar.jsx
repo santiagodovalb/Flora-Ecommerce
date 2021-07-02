@@ -84,11 +84,11 @@ function Navbar() {
           <h3>- Register</h3>
         </Link>}
 
-        {user.nick && <Link to="/register">
+        {user.nick && <Link to="/user">
         <img
           className="png"
           src={userIcon}
-          alt="searchImg"
+          alt="userImg"
         />
           <h3>- {user.nick}</h3>
         </Link>}
