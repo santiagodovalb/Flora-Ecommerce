@@ -45,13 +45,13 @@ function Cart() {
                         <Link to={`/products/${product.ProductId}`}>
                         <img src={product.Product.imagen} alt={'imagen de producto'} />
                         </Link>
-                        <h1>{product.Product.nombre}</h1>
-                        <h2>Cantidad: {product.cantidad}</h2>
+                        <h1>{product.Product.nombre} (${product.Product.precio})</h1>
+                        <h2>Cantidad: {product.cantidad} (${product.cantidad * product.Product.precio})</h2>
                         <button onClick={() => handleClear(product.ProductId)} className='clear' type="button">Clear</button>
                     </div>
                 )
             })}
-            {cartProducts.length ? <h2>Total a pagar: ${calcularTotal()}</h2> : ''}
+            {cartProducts.length ? <h2 className='total'>Total a pagar: ${calcularTotal()}</h2> : ''}
         </div>
     )
 }
