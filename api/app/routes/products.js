@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require('sequelize');
 const { Products } = require("../../db/models");
 
 router.get("/", (req, res, next) => {
@@ -11,9 +12,12 @@ router.get("/", (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   console.log('QUERY', req.query)
+  const { nombre } = req.query
   Products.findAll({
     where: {
-      nombre: req.query.nombre,
+      nombre: {
+        [Op.iLike]: `%${nombre}%`
+      }
     },
   })
     .then((arrayProducts) => {
