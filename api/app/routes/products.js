@@ -11,7 +11,6 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/search", (req, res, next) => {
-  console.log('QUERY', req.query)
   const { nombre } = req.query
   Products.findAll({
     where: {
@@ -54,13 +53,14 @@ router.delete("/:id", (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-  const { nombre, precio, imagen, descripcion } = req.body;
+  const { nombre, precio, imagen, descripcion, stock } = req.body;
   Products.findByPk(req.params.id)
     .then((product) => {
       product.nombre = nombre;
       product.precio = precio;
       product.imagen = imagen;
       product.descripcion = descripcion;
+      product.stock += stock;
       return product.save();
     })
     .then((productSave) => res.status(204).send(productSave))
