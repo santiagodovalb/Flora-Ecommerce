@@ -5,7 +5,7 @@ class PaymentMethod extends S.Model {}
 
 PaymentMethod.init(
   {
-    typeMethod: {
+    type: {
       type: S.STRING
     },
   },
