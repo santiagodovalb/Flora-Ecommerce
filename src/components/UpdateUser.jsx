@@ -5,14 +5,20 @@ import { useHistory } from "react-router-dom";
 import { message } from "antd";
 import "../styles/Register.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from '../state/user'
 
-function Register() {
+function UpdateUser() {
+
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
   const [form, setForm] = useState({
-    nick: "",
-    email: "",
-    direction: "",
-    phone: "",
-    password: "",
+    nick: user.nick,
+    email: user.email,
+    direction: user.direction,
+    phone: user.phone,
+    password: user.password,
   });
 
   const validate = (e) => {
@@ -44,50 +50,42 @@ function Register() {
     e.preventDefault();
 
     axios
-      .post("/api/users/register", form)
-      .then(() => {
-        history.push("/login");
-        message.success("User created successfully");
+      .put(`/api/users/edit/${user.id}`, form)
+      .then(res => res.data)
+      .then((user) => {
+        history.push("/user");
+        dispatch(setUser(user))
+        message.success("User updated successfully");
       })
       .catch((err) => {
-        message.error("User not created");
+        message.error("User not updated");
         return err;
       });
   };
 
   return (
     <div className="register">
-      <h1>Register</h1>
+      <h1>Update your info</h1>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="nick">Username</label>
-        <input onChange={handleChange} type="text" name="nick" />
         <label htmlFor="email">Email</label>
         <input
           onChange={handleChange}
           onBlur={validate}
           type="text"
           name="email"
+          defaultValue={user.email}
         />
         <label htmlFor="direction">Direction</label>
-        <input onChange={handleChange} type="text" name="direction" />
+        <input onChange={handleChange} type="text" name="direction" defaultValue={user.direction}/>
         <label htmlFor="phone">Phone</label>
-        <input onChange={handleChange} type="text" name="phone" />
-        <label htmlFor="password">Password</label>
-        <input
-          onBlur={validate}
-          onChange={handleChange}
-          type="password"
-          name="password"
-        />
+        <input onChange={handleChange} type="text" name="phone" defaultValue={user.phone}/>
         <button className="submit" type="submit" value="submit">
           Submit
         </button>
       </form>
-      <Link to="/login">
-        <h3>Already have an account? Login</h3>
-      </Link>
+     
     </div>
   );
 }
 
-export default Register;
+export default UpdateUser;

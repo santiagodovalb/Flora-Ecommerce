@@ -16,6 +16,8 @@ import axios from "axios";
 import { setUser } from "../state/user";
 import { message } from "antd";
 import User from '../components/User'
+import Checkout from '../components/Checkout'
+import UpdateUser from "../components/UpdateUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/search/:search" component={Search} />
         <Route path='/user' component={User} />
+        <Route path='/checkout' component={Checkout} />
+        <Route path='/edit-user' component={UpdateUser} />
         {/*<Route path='/admin' component={Admin} />*/}
         <Redirect from="*" to="/" />
       </Switch>

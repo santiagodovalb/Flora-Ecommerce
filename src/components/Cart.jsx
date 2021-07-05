@@ -7,10 +7,12 @@ import '../styles/Cart.css';
 import { message } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function Cart() {
 
     const dispatch = useDispatch();
+    const history = useHistory()
     const cartProducts = useSelector(state => state.cart)
 
     useEffect(() => {
@@ -58,6 +60,11 @@ function Cart() {
         
     }
 
+    const handleCheckout = (e) => {
+        //axios
+        history.push('/checkout')
+    }
+
     return(
         <div>
             {!cartProducts.length && <h1>No products added</h1>}
@@ -75,7 +82,12 @@ function Cart() {
                     </div>
                 )
             })}
-            {cartProducts.length ? <h2 className='total'>Total a pagar: ${calcularTotal()}</h2> : ''}
+            {cartProducts.length ? 
+            <div>
+            <h2 className='total'>Total a pagar: ${calcularTotal()}</h2> 
+            <button onClick={handleCheckout}className='checkout' type='button'>Ir a pagar</button>
+            </div>
+            : ''}
         </div>
     )
 }
