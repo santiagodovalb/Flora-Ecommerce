@@ -1,69 +1,4 @@
 {
-<<<<<<< HEAD
-    "name": "flora-app",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@reduxjs/toolkit": "^1.6.0",
-        "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^11.2.7",
-        "@testing-library/user-event": "^12.8.3",
-        "antd": "^4.16.6",
-        "axios": "^0.21.1",
-        "bcrypt": "^5.0.1",
-        "chalk": "^4.1.1",
-        "concurrently": "^6.2.0",
-        "cookie-parser": "^1.4.5",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "express-session": "^1.17.2",
-        "helmet": "^4.6.0",
-        "nodemon": "^2.0.8",
-        "passport": "^0.4.1",
-        "passport-local": "^1.0.0",
-        "pg": "^8.6.0",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-redux": "^7.2.4",
-        "react-router": "^5.2.0",
-        "react-router-dom": "^5.2.0",
-        "react-scripts": "4.0.3",
-        "redux-logger": "^3.0.6",
-        "sequelize": "^6.6.4",
-        "volleyball": "^1.5.1",
-        "web-vitals": "^1.1.2"
-    },
-    "optionalDependencies": {
-        "fsevents": "^2.0.7"
-    },
-    "scripts": {
-        "start": "concurrently 'npm run server' 'npm run client'",
-        "server": "nodemon api/server.js",
-        "client": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "seed": "node api/db/seed"
-    },
-    "proxy": "http://localhost:3001/",
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
-=======
   "name": "flora-app",
   "version": "0.1.0",
   "private": true,
@@ -126,5 +61,4 @@
       "last 1 safari version"
     ]
   }
->>>>>>> 1a8ba7841fcaaffe415c0ab861d6067a39b6010c
 }

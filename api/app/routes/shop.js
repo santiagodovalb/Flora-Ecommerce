@@ -25,6 +25,7 @@ router.post("/add", async (req, res, next) => {
             },
         });
 
+
         if (!created) carrito.cantidad += cantidad;
         await carrito.save();
 
@@ -47,38 +48,27 @@ router.delete("/:ProductId", async (req, res, next) => {
 
 
 router.post("/order", async (req, res, next) => {
-try {
     const userId = req.user.dataValues.id;
-    const carritos = await Carrito.findAll({ where: userId });
     let obj = {};
     let total = 0;
-    carritos.forEach(async (carrito) => {
-        console.log(carrito)
-        const prod = await Products.findByPk(carrito.ProductId);
-        console.log(prod)
-        total += prod.precio * carrito.cantidad;
-        console.log('TOTAL',total)
-        console.log('STOCK', carrito.cantidad)
-        await prod.decrement("stock", { by: carrito.cantidad });
-        console.log("STOCKDESPUES", carrito.cantidad);
-        await prod.save();
-        obj = { ...obj, product: prod, cantidad: carrito.cantidad };
-        console.log('OBJ', obj)
-    })
-
-    console.log('TOTAL AFU', total)
-    const orden = await Order.create({
-        total: total,
-        carrito: [obj],
-    });
-    console.log('ORDER', orden)
-    res.status(201).json(orden)
-    } catch(err) {
-        next(err)
-    }
-
-});
-
+    Carrito.findAll({ where: userId }).then(carrito => {
+        carrito.forEach((carrito) => {
+            Products.findByPk(carrito.ProductId).then(product => {
+                total += product.precio * carrito.cantidad;
+                product.decrement('stock', { by: carrito.cantidad });
+                product.save()
+                obj = { ...obj, product: product, cantidad: carrito.cantidad }
+            })
+        })
+    }).then(() => {
+                Order.create({
+                    total,
+                    carrito: [obj]
+                }).then(carro => {
+                    Carrito.destroy({ where: { userId } }).then(() => res.status(200).json(carro))
+                })
+            })
+})
 router.post("/:ProductId/amount", async (req, res, next) => {
     const product = req.params.ProductId;
     const mode = req.body.mode;
@@ -122,3 +112,31 @@ module.exports = router;
 //         next(err);
 //     }
 // });
+
+
+//  const carritos = await Carrito.findAll({ where: userId });
+//     let obj = {};
+//     let total = 0;
+//     carritos.forEach(async (carrito) => {
+      
+//         const prod = await Products.findByPk(carrito.ProductId);
+        
+//         total += prod.precio * carrito.cantidad;
+        
+//         await prod.decrement("stock", { by: carrito.cantidad });
+    
+//         await prod.save();
+//         obj = { ...obj, product: prod, cantidad: carrito.cantidad };
+
+//     })
+
+
+//     const orden = await Order.create({
+//         total: total,
+//         carrito: [obj],
+//     });
+    
+//     res.status(201).json(orden)
+//     } catch(err) {
+//         next(err)
+//     }
