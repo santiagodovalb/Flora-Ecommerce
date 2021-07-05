@@ -3,18 +3,31 @@ import React from "react";
 import "../styles/Card.css";
 import { message }from 'antd';
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { setCart } from '../state/cart';
 
 export default function Card({ product }) {
 
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user)
+  const cartProducts = useSelector(state => state.cart)
+  const cartProduct = cartProducts.filter(prod => prod.ProductId === product.id )
 
   const handleClick = (e) => {
     e.preventDefault();
 
+    if (cartProduct[0]?.cantidad === product.stock) {
+      message.error('No more stock available')
+      return
+    }
+
     // COMPORTAMIENTO CON USUARIO LOGEADO
     if(user.id) {
       axios.post('/api/shop/add', {ProductId: product.id, cantidad: 1})
-      .then(() => message.success('Product added'))
+      .then(() => {
+        message.success('Product added')
+        dispatch(setCart())
+      })
       .catch(err => message.error('Unable to add'))
     }
 
@@ -29,6 +42,8 @@ export default function Card({ product }) {
 
   return (
     <div className="wrapper">
+     
+
       <div className="product-img">
         <img src={product.imagen} alt={product.nombre} />
       </div>
