@@ -32,6 +32,7 @@ Carrito.belongsTo(Products);
 
 // Order.belongsTo(Carrito);
 Order.belongsTo(User);
+Order.belongsTo(PaymentMethod);
 
 
 

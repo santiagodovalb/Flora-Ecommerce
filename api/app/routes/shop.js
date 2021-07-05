@@ -47,8 +47,42 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
+//Orden
+
+//servir todas las ordenes del usuario logueado
+router.get("/order", (req, res, next) => {
+    const userId = req.user.dataValues.id;
+    Order.findAll({ where: { userId } }).then(orders => {
+        res.status(200).json(orders)
+    })
+});
+
+//cancelar una orden especifica
+router.put('/order/cancelled/:id', (req, res, next) => {
+    const orderId = req.params.id
+    Order.findByPk(orderId).then(order => {
+        return order.cancelled()
+    }).then(orderCancelled => {
+        res.status(201).json(orderCancelled)
+    })
+})
+
+//cambiar el estado a "entregado" de una orden especifica
+router.put('/order/delivered/:id', (req, res, next) => {
+    const orderId = req.params.id;
+    Order.findByPk(orderId)
+        .then((order) => {
+            return order.delivered();
+        })
+        .then((orderDelivered) => {
+            res.status(201).json(orderDelivered);
+        });
+})
+
+
 router.post("/order", async (req, res, next) => {
     try {
+        const { PaymentMethodId } = req.body;
         const userId = req.user.dataValues.id;
         const carritos = await Carrito.findAll({
             where: { userId },
@@ -69,6 +103,7 @@ router.post("/order", async (req, res, next) => {
             total,
             carritos,
             userId,
+            PaymentMethodId,
         });
 
         await Carrito.destroy({ where: { userId } });
@@ -94,31 +129,3 @@ router.post("/:ProductId/amount", async (req, res, next) => {
 });
 
 module.exports = router;
-
-// router.post("/order2", async (req, res, next) => {
-//     try {
-//         const userId = req.user.dataValues.id;
-//         const carritos = await Carrito.findAll({ where: userId });
-//         let obj = {};
-//         let total = 0;
-//         carritos.forEach( (carrito) => {
-//             Products.findByPk(carrito.ProductId).then(prod => {
-//                total += prod.precio * carrito.cantidad;
-//                prod.decrement("stock", { by: carrito.cantidad });
-//                prod.save();
-//                obj = { ...obj, product: prod, cantidad: carrito.cantidad };
-//             })
-
-//         });
-
-//         console.log("TOTAL AFU", total);
-//         const orden = await Order.create({
-//             total: total,
-//             carrito: [obj],
-//         });
-//         console.log("ORDER", orden);
-//         res.status(201).json(orden);
-//     } catch (err) {
-//         next(err);
-//     }
-// });
