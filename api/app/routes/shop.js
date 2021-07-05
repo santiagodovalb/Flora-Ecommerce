@@ -45,65 +45,107 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
+
+
+router.post('/:ProductId/amount', async (req, res, next) => {
+    const product = req.params.ProductId;
+    const mode = req.body.mode;
+    const usuario = req.user.dataValues.id;
+    const carro = await Carrito.findOne({where:{ProductId: product, userId: usuario }});
+    if(mode === 'resta') await carro.decrement('cantidad', { by: 1})
+    if(mode === 'suma') await carro.increment('cantidad', { by: 1}) 
+    
+    await carro.save()
+    res.status(200).json(carro)
+})
+
+
 router.post("/order", async (req, res, next) => {
-try {
     const userId = req.user.dataValues.id;
-    const carritos = await Carrito.findAll({ where: userId });
     let obj = {};
     let total = 0;
-    carritos.forEach(async (carrito) => {
-        console.log(carrito)
-        const prod = await Products.findByPk(carrito.ProductId);
-        console.log(prod)
-        total += prod.precio * carrito.cantidad;
-        console.log('TOTAL',total)
-        console.log('STOCK', carrito.cantidad)
-        await prod.decrement("stock", { by: carrito.cantidad });
-        console.log("STOCKDESPUES", carrito.cantidad);
-        await prod.save();
-        obj = { ...obj, product: prod, cantidad: carrito.cantidad };
-        console.log('OBJ', obj)
+    Carrito.findAll({ where: userId }).then(carrito => {
+        carrito.forEach((carrito) => {
+            Products.findByPk(carrito.ProductId).then(product => {
+                total += product.precio * product.cantidad;
+                product.decrement('stock', {by: carrito.cantidad});
+                product.save()
+                obj = {...obj, product: product, cantidad: carrito.cantidad}
+            }).then(() => {
+                Order.create({
+                    total: total,
+                    carrito: [obj]
+                }).then(orden => {
+                    Carrito.destroy({where:{ userId }}).then(() => {
+                        res.status(201).json(orden)
+                    })
+                })
+            })
+        })
     })
+    // carritos.forEach(async (carrito) => {
+    //     const prod = await Products.findByPk(carrito.ProductId);
+    //     total += prod.precio * carrito.cantidad;
+    //     await prod.decrement("stock", { by: carrito.cantidad });
+    //     await prod.save();
+    //     obj = { ...obj, product: prod, cantidad: carrito.cantidad };
+    // })
 
-    console.log('TOTAL AFU', total)
-    const orden = await Order.create({
-        total: total,
-        carrito: [obj],
-    });
-    console.log('ORDER', orden)
-    res.status(201).json(orden)
-    } catch(err) {
-        next(err)
-    }
+    // const orden = await Order.create({
+    //     total: total,
+    //     carrito: [obj],
+    // });
+    // console.log('ORDER', orden)
+    // res.status(201).json(orden)
 
+    
 });
 
 module.exports = router;
 
 // router.post("/order2", async (req, res, next) => {
-//     try {
-//         const userId = req.user.dataValues.id;
-//         const carritos = await Carrito.findAll({ where: userId });
-//         let obj = {};
-//         let total = 0;
-//         carritos.forEach( (carrito) => {
-//             Products.findByPk(carrito.ProductId).then(prod => {
-//                total += prod.precio * carrito.cantidad;
-//                prod.decrement("stock", { by: carrito.cantidad });
-//                prod.save();
-//                obj = { ...obj, product: prod, cantidad: carrito.cantidad };
+    //     try {
+        //         const userId = req.user.dataValues.id;
+        //         const carritos = await Carrito.findAll({ where: userId });
+        //         let obj = {};
+        //         let total = 0;
+        //         carritos.forEach( (carrito) => {
+            //             Products.findByPk(carrito.ProductId).then(prod => {
+                //                total += prod.precio * carrito.cantidad;
+                //                prod.decrement("stock", { by: carrito.cantidad });
+                //                prod.save();
+                //                obj = { ...obj, product: prod, cantidad: carrito.cantidad };
 //             })
-            
+
 //         });
 
 //         console.log("TOTAL AFU", total);
 //         const orden = await Order.create({
-//             total: total,
-//             carrito: [obj],
-//         });
-//         console.log("ORDER", orden);
-//         res.status(201).json(orden);
-//     } catch (err) {
-//         next(err);
-//     }
-// });
+    //             total: total,
+    //             carrito: [obj],
+    //         });
+    //         console.log("ORDER", orden);
+    //         res.status(201).json(orden);
+    //     } catch (err) {
+        //         next(err);
+        //     }
+        // });
+        
+        
+        // router.put('/:ProductId/increment', async (req, res, next) => {
+        //     const product = req.params.ProductId;
+        //     const usuario = req.user.dataValues.id;
+        //     const carro = await Carrito.findOne({where:{ProductId: product, userId: usuario }});
+        //     await carro.increment('cantidad', { by: 1})
+        //     await carro.save()
+        //     res.status(200).json(carro)
+        // })
+        
+        // router.put('/:ProductId/decrement', async (req, res, next) => {
+        //     const product = req.params.ProductId;
+        //     const usuario = req.user.dataValues.id;
+        //     const carro = await Carrito.findOne({where:{ProductId: product, userId: usuario }});
+        //     await carro.decrement('cantidad', { by: 1})
+        //     await carro.save()
+        //     res.status(200).json(carro)
+        // })
