@@ -17,7 +17,7 @@ router.post("/add", async (req, res, next) => {
     try {
         const { ProductId, cantidad } = req.body;
         const userId = req.user.dataValues.id;
-        const { precio } = await Products.findByPk(ProductId)
+        const { precio } = await Products.findByPk(ProductId);
 
         const [carrito, created] = await Carrito.findOrCreate({
             where: { userId, ProductId },
@@ -47,35 +47,36 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
-
 router.post("/order", async (req, res, next) => {
-try {
-    const userId = req.user.dataValues.id;
-    const carritos = await Carrito.findAll({ where: {userId} });
-   
-    let total = 0;
+    try {
+        const userId = req.user.dataValues.id;
+        const carritos = await Carrito.findAll({
+            where: { userId },
+            attributes: { exclude: ["id", "userId"] },
+        });
 
-    carritos.forEach((carrito) => {
-        total += carrito.precioBase * carrito.cantidad
-        Products.findByPk(carrito.ProductId).then(prod => {
-            prod.decrement("stock", { by: carrito.cantidad })
-            return prod.save();
-        })
-    })
+        let total = 0;
 
-    const order = await Order.create({
-        total,
-        carritos,
-        userId,
-    });
+        carritos.forEach((carrito) => {
+            total += carrito.precioBase * carrito.cantidad;
+            Products.findByPk(carrito.ProductId).then((prod) => {
+                prod.decrement("stock", { by: carrito.cantidad });
+                return prod.save();
+            });
+        });
 
-    await Carrito.destroy({where: {userId}})
+        const order = await Order.create({
+            total,
+            carritos,
+            userId,
+        });
 
-    res.status(201).json(order)
-    } catch(err) {
-        next(err)
+        await Carrito.destroy({ where: { userId } });
+
+        res.status(201).json(order);
+    } catch (err) {
+        next(err);
     }
-
 });
 
 router.post("/:ProductId/amount", async (req, res, next) => {
@@ -107,7 +108,7 @@ module.exports = router;
 //                prod.save();
 //                obj = { ...obj, product: prod, cantidad: carrito.cantidad };
 //             })
-            
+
 //         });
 
 //         console.log("TOTAL AFU", total);
