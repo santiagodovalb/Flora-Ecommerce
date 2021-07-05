@@ -13,7 +13,6 @@ function SingleProduct() {
 
   const [product, setProduct] = useState({});
 
-  const [realStock, setRealStock] = useState(0)
 
   const dispatch = useDispatch();
 
@@ -23,8 +22,7 @@ function SingleProduct() {
 
   const { id } = useParams();
 
-  const cartProducts = useSelector(state => state.cart)
-  const cartProduct = cartProducts.filter(prod => prod.ProductId === product.id )
+  const cartProduct = useSelector(state => state.cart).filter(prod => prod.ProductId === product.id )
 
   useEffect(() => {
     dispatch(setCart())
@@ -32,21 +30,21 @@ function SingleProduct() {
       .get(`/api/products/${id}`)
       .then((res) => res.data)
       .then((product) => {
-        setProduct(product);
-        setRealStock(product.stock - cartProduct[0]?.cantidad)
-        
+        setProduct(product);        
         let options = "";
-        for (var i = 1; i <= realStock; i++) {
+        for (var i = 1; i <= product.stock; i++) {
           options += `<option value=${i}>${i}</option>`;
         }
         document.getElementById("quantity").innerHTML = options;
       });
-  }, [realStock, cartProduct[0]?.cantidad]);
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    if(!realStock) {
+    console.log('PRODUCT', cartProduct)
+
+    if(cartProduct.length && cartProduct[0].cantidad + Number(document.getElementById('quantity').value) >= product.stock) {
       message.error('No more stock available')
       return
     }
@@ -79,7 +77,7 @@ function SingleProduct() {
         <h1>{product.nombre}</h1>
         <h2>{product.descripcion}</h2>
         <p>Precio: {product.precio}</p>
-        <p>Stock: {realStock}</p>
+        <p>Stock: {product.stock}</p>
         <div className="addToCart">
           <select type='integer' id="quantity"></select>
           <button onClick={handleClick} className="cartButton" type="button">

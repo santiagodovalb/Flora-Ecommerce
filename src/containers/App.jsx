@@ -18,13 +18,15 @@ import { message } from "antd";
 import User from '../components/User'
 import Checkout from '../components/Checkout'
 import UpdateUser from "../components/UpdateUser";
+import { setCart } from '../state/cart';
+
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setProducts());
-
+      dispatch(setCart())
     axios
       .get("/api/users/me")
       .then((res) => res.data)

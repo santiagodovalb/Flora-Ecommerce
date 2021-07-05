@@ -1,0 +1,62 @@
+.checkoutProds {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%
+}
+
+.eachProd {
+    display: flex;
+    width: 33%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto
+}
+
+.checkoutProds img {
+  height: 120px;
+  width: 170px;
+  border-radius: 3px;
+  border: 2px solid black;
+}
+
+.checkoutProds p {
+    font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #A8534B;
+  letter-spacing: 0.2em;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.checkoutDiv hr {
+    width: 80%;
+    border: 1px solid black;
+    background-color: black;
+    margin: 15px auto
+  }
+
+  .checkoutDiv h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+  color: #474747;
+  font-weight: 300;
+  }
+
+  .checkoutDiv h2 {
+    font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color: #A8534B;
+  letter-spacing: 0.2em;
+}
+
+.checkoutDiv h3 {
+    color:#474747;
+}
+
+.checkoutDiv select {
+}

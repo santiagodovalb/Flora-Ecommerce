@@ -15,9 +15,7 @@ function Cart() {
     const history = useHistory()
     const cartProducts = useSelector(state => state.cart)
 
-    useEffect(() => {
-        dispatch(setCart())
-    }, [])
+    
 
     const calcularTotal = () => {
         let total = 0
@@ -61,12 +59,11 @@ function Cart() {
     }
 
     const handleCheckout = (e) => {
-        //axios
         history.push('/checkout')
     }
 
     return(
-        <div>
+        <div className='cartWrapper'>
             {!cartProducts.length && <h1>No products added</h1>}
             {cartProducts.map(product => {
                 return (

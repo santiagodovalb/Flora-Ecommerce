@@ -1,3 +1,7 @@
+.cartWrapper {
+    padding-bottom: 50px 
+}
+
 .cart {
     display: flex;
     flex-direction: row;
