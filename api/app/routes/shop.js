@@ -48,6 +48,7 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
+
 router.post("/order", async (req, res, next) => {
     try {
         const userId = req.user.dataValues.id;
@@ -73,7 +74,7 @@ router.post("/order", async (req, res, next) => {
         });
 
         await Carrito.destroy({ where: { userId } });
-
+       
         res.status(201).json(order);
     } catch (err) {
         next(err);
