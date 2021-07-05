@@ -8,6 +8,9 @@ Carrito.init(
     cantidad: {
       type: S.INTEGER,
     },
+    precioBase: {
+      type: S.INTEGER,
+    }
     // state: {
     //   type: S.STRING,
     //   defaultValue: "pending",
