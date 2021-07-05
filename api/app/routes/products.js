@@ -2,7 +2,6 @@ const router = require("express").Router();
 const { Op } = require('sequelize');
 const { Products } = require("../../db/models");
 
-
 router.get("/", (req, res, next) => {
   Products.findAll()
     .then((arrayProducts) => {

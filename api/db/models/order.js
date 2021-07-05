@@ -7,7 +7,7 @@ Order.init(
     {
        total:{type: sequelize.DOUBLE, allowNull: false},
     //    estado:{type: sequelize.BOOLEAN, allowNull: false},
-       carrito: {
+       carritos: {
            type: sequelize.ARRAY(sequelize.JSON)
        }
     }, { sequelize: db, modelName: 'Order'}

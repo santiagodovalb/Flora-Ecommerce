@@ -17,11 +17,13 @@ router.post("/add", async (req, res, next) => {
     try {
         const { ProductId, cantidad } = req.body;
         const userId = req.user.dataValues.id;
+        const { precio } = await Products.findByPk(ProductId)
 
         const [carrito, created] = await Carrito.findOrCreate({
             where: { userId, ProductId },
             defaults: {
                 cantidad,
+                precioBase: precio,
             },
         });
 
@@ -49,26 +51,30 @@ router.delete("/:ProductId", async (req, res, next) => {
 
 router.post("/order", async (req, res, next) => {
     const userId = req.user.dataValues.id;
-    let obj = {};
+    const carritos = await Carrito.findAll({ where: {userId},attributes: {exclude: ['id', 'userId']} });
+   
     let total = 0;
-    Carrito.findAll({ where: userId }).then(carrito => {
-        carrito.forEach((carrito) => {
-            Products.findByPk(carrito.ProductId).then(product => {
-                total += product.precio * carrito.cantidad;
-                product.decrement('stock', { by: carrito.cantidad });
-                product.save()
-                obj = { ...obj, product: product, cantidad: carrito.cantidad }
-            })
+
+    carritos.forEach((carrito) => {
+        total += carrito.precioBase * carrito.cantidad
+        Products.findByPk(carrito.ProductId).then(prod => {
+            prod.decrement("stock", { by: carrito.cantidad })
+            return prod.save();
         })
-    }).then(() => {
-                Order.create({
-                    total,
-                    carrito: [obj]
-                }).then(carro => {
-                    Carrito.destroy({ where: { userId } }).then(() => res.status(200).json(carro))
-                })
-            })
-})
+    })
+
+    const order = await Order.create({
+        total,
+        carritos,
+        userId,
+    });
+
+    await Carrito.destroy({where: {userId}})
+
+    res.status(201).json(order)
+
+});
+
 router.post("/:ProductId/amount", async (req, res, next) => {
     const product = req.params.ProductId;
     const mode = req.body.mode;
