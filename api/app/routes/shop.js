@@ -48,35 +48,12 @@ router.delete("/:ProductId", async (req, res, next) => {
 });
 
 router.post("/order", async (req, res, next) => {
-<<<<<<< HEAD
-    const userId = req.user.dataValues.id;
-    const carritos = await Carrito.findAll({ where: {userId}, attributes: {exclude: ['id', 'userId']}
-});
-   
-    let total = 0;
-
-    carritos.forEach((carrito) => {
-        total += carrito.precioBase * carrito.cantidad
-        Products.findByPk(carrito.ProductId).then(prod => {
-            prod.decrement("stock", { by: carrito.cantidad })
-            return prod.save();
-        })
-    })
-    // carritos.forEach(async (carrito) => {
-    //     const prod = await Products.findByPk(carrito.ProductId);
-    //     total += prod.precio * carrito.cantidad;
-    //     await prod.decrement("stock", { by: carrito.cantidad });
-    //     await prod.save();
-    //     obj = { ...obj, product: prod, cantidad: carrito.cantidad };
-    // })
-=======
     try {
         const userId = req.user.dataValues.id;
         const carritos = await Carrito.findAll({
             where: { userId },
             attributes: { exclude: ["id", "userId"] },
         });
->>>>>>> 83bacb97a7788e0b535f72c971064319c0e95082
 
         let total = 0;
 
@@ -88,12 +65,6 @@ router.post("/order", async (req, res, next) => {
             });
         });
 
-<<<<<<< HEAD
-    res.status(201).json(order)
-    }
-
-    );
-=======
         const order = await Order.create({
             total,
             carritos,
@@ -107,7 +78,6 @@ router.post("/order", async (req, res, next) => {
         next(err);
     }
 });
->>>>>>> 83bacb97a7788e0b535f72c971064319c0e95082
 
 router.post("/:ProductId/amount", async (req, res, next) => {
     const product = req.params.ProductId;
