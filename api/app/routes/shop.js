@@ -17,7 +17,7 @@ router.post("/add", async (req, res, next) => {
     try {
         const { ProductId, cantidad } = req.body;
         const userId = req.user.dataValues.id;
-        const { precio } = await Products.findByPk(ProductId)
+        const { precio } = await Products.findByPk(ProductId);
 
         const [carrito, created] = await Carrito.findOrCreate({
             where: { userId, ProductId },
@@ -47,8 +47,8 @@ router.delete("/:ProductId", async (req, res, next) => {
     }
 });
 
-
 router.post("/order", async (req, res, next) => {
+<<<<<<< HEAD
     const userId = req.user.dataValues.id;
     const carritos = await Carrito.findAll({ where: {userId}, attributes: {exclude: ['id', 'userId']}
 });
@@ -69,19 +69,45 @@ router.post("/order", async (req, res, next) => {
     //     await prod.save();
     //     obj = { ...obj, product: prod, cantidad: carrito.cantidad };
     // })
+=======
+    try {
+        const userId = req.user.dataValues.id;
+        const carritos = await Carrito.findAll({
+            where: { userId },
+            attributes: { exclude: ["id", "userId"] },
+        });
+>>>>>>> 83bacb97a7788e0b535f72c971064319c0e95082
 
-    const order = await Order.create({
-        total,
-        carritos,
-        userId,
-    });
+        let total = 0;
 
-    await Carrito.destroy({where: {userId}})
+        carritos.forEach((carrito) => {
+            total += carrito.precioBase * carrito.cantidad;
+            Products.findByPk(carrito.ProductId).then((prod) => {
+                prod.decrement("stock", { by: carrito.cantidad });
+                return prod.save();
+            });
+        });
 
+<<<<<<< HEAD
     res.status(201).json(order)
     }
 
     );
+=======
+        const order = await Order.create({
+            total,
+            carritos,
+            userId,
+        });
+
+        await Carrito.destroy({ where: { userId } });
+
+        res.status(201).json(order);
+    } catch (err) {
+        next(err);
+    }
+});
+>>>>>>> 83bacb97a7788e0b535f72c971064319c0e95082
 
 router.post("/:ProductId/amount", async (req, res, next) => {
     const product = req.params.ProductId;
