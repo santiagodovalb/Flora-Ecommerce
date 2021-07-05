@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Category, Products } = require('../../db/models');
 
-// Busco todas las categorias
 router.get("/", async (req, res, next) => {
   try {
       const categories = await Category.findAll()

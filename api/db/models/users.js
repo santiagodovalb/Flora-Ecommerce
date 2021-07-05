@@ -49,8 +49,10 @@ User.prototype.validatePassword = function (password) {
 };
 
 User.addHook("afterCreate", async (user) => {
-    await user.setRol(2)
-    await user.save
+    if(!user.rolId) {
+        await user.setRol(2)
+        await user.save
+    }
 });
 
 module.exports = User;

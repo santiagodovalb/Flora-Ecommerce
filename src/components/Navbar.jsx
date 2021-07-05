@@ -12,6 +12,7 @@ import navLogo from '../assets/Title.png';
 import userIcon from '../assets/userIcon.png'
 import registerIcon from '../assets/registerIcon.png'
 import lupa from '../assets/lupa.png'
+import logOut from '../assets/logout.png'
 
 function Navbar() {
   const [search, setSearch] = useState("");
@@ -97,7 +98,7 @@ function Navbar() {
           <div onClick={handleLogout} style={{ cursor: "pointer" }}>
             <img
               className="png"
-              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              src={logOut}
               alt="searchImg"
             />
             <h3>- Log out</h3>
