@@ -10,12 +10,11 @@ export default function Search() {
   const { search } = useParams();
 
   useEffect(() => {
-    console.log('LOG')
     axios
       .get(`/api/products/search?nombre=${search}`)
       .then((res) => res.data)
       .then((prods) => setProducts(prods));
-  }, []);
+  }, [search]);
 
   return (
     <div>
