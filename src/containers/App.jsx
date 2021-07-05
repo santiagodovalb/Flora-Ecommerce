@@ -19,13 +19,14 @@ import User from '../components/User'
 import Checkout from '../components/Checkout'
 import UpdateUser from "../components/UpdateUser";
 import { setCart } from '../state/cart';
+import Home from "../components/Home";
+import Categories from "../components/Categories";
 
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProducts());
       dispatch(setCart())
     axios
       .get("/api/users/me")
@@ -46,7 +47,7 @@ function App() {
       <Navbar />
       {/* <Sidebar /> */}
       <Switch>
-        <Route exact path="/" render={() => <Products products={products} />} />
+        <Route exact path="/" component={Home} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
@@ -55,6 +56,7 @@ function App() {
         <Route path='/user' component={User} />
         <Route path='/checkout' component={Checkout} />
         <Route path='/edit-user' component={UpdateUser} />
+        <Route path='/category/:type' component={Categories} />
         {/*<Route path='/admin' component={Admin} />*/}
         <Redirect from="*" to="/" />
       </Switch>
