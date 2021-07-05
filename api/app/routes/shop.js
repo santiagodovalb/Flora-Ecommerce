@@ -27,6 +27,7 @@ router.post("/add", async (req, res, next) => {
             },
         });
 
+
         if (!created) carrito.cantidad += cantidad;
         await carrito.save();
 
