@@ -24,9 +24,9 @@ router.post("/logout", (req, res, next) => {
 });
 
 router.put("/edit/:id", (req, res, next) => {
-    User.update(req.body, { where: { id: req.params.id } })
-        .then(() => {
-            res.sendStatus(201);
+    User.update(req.body, { where: { id: req.params.id }, returning: true })
+        .then(([updated, user]) => {
+            res.status(201).json(user[0])
         })
         .catch(next);
 });

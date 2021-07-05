@@ -1,0 +1,17 @@
+.userWrapper {
+    margin-top: 40px;
+}
+
+.userWrapper h1{
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+  color: #474747;
+  font-weight: 300;
+}
+
+.userWrapper h2 {
+    font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color: #A8534B;
+  letter-spacing: 0.2em;
+}
