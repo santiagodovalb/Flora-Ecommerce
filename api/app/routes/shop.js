@@ -64,7 +64,7 @@ router.put('/order/cancelled/:id', (req, res, next) => {
         return order.cancelled()
     }).then(orderCancelled => {
         res.status(201).json(orderCancelled)
-    })
+    }).catch(next)
 })
 
 //cambiar el estado a "entregado" de una orden especifica
@@ -76,7 +76,7 @@ router.put('/order/delivered/:id', (req, res, next) => {
         })
         .then((orderDelivered) => {
             res.status(201).json(orderDelivered);
-        });
+        }).catch(next)
 })
 
 
