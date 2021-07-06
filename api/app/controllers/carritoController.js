@@ -36,7 +36,7 @@ const CarritoController = {
         }
     },
 
-    async destroy (req, res, next) {
+    async destroyByPk (req, res, next) {
          try {
              const { ProductId } = req.params;
              const userId = req.user.dataValues.id;
