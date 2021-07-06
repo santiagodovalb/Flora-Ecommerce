@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Reviews } = require("../../db/models");
+const { Reviews, User } = require("../../db/models");
 
 
 // Guardo una nueva Review
@@ -20,7 +20,7 @@ router.post('/:id/add', async (req, res,next) => {
 router.get('/:id', async (req, res,next) => {
     try {
         const ProductId = req.params.id
-        const reviews = await Reviews.findAll({ where:{ProductId} })
+        const reviews = await Reviews.findAll({ where:{ProductId}, include: 'user' })
         res.status(200).json(reviews)
     } catch (err) {
         next(err)

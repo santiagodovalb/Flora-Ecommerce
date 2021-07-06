@@ -1,2 +1,3 @@
-#reviewText {
+.review {
+    display: flex;
 }
