@@ -23,6 +23,7 @@ function Products() {
 
   const location = useLocation()
   const products = useSelector(state => state.products)
+  const categorie = location.pathname.slice(11)
 
   const handleClick = (e) => {
     history.push(`/category/${e.target.value}`)
@@ -32,18 +33,12 @@ function Products() {
     <div className='products'>
       <div className='logoTitle'>
         <img src={bodyLogo} alt="logo" />
-        <h1 className="productsTitle">{ location.pathname === '/' ? 'Our Products' : 'Search results'}</h1>
+        {console.log(categorie)}
+        {location.pathname === '/' && <h1 className="productsTitle">Our Products</h1>}
+        {location.pathname.includes('search') && <h1 className="productsTitle">Search results</h1>}
+        {location.pathname.includes('categorie') && <h1 className="productsTitle">{categorie}</h1>}
       </div>
       <hr/>
-      <div className='categories'>
-      {categorias.map(categoria => {
-                return (
-                    <div key={categoria.id}>
-                        <button className='buttons' onClick={handleClick} value={categoria.type}>{categoria.type}</button>
-                    </div>
-                )
-            })}
-      </div>
       <div className="productDiv">
         {products && products.map((product) => {
           return (
