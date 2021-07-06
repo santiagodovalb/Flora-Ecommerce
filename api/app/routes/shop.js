@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Carrito, Products, Order } = require("../../db/models");
+const sendOrderEmail = require("../../utils");
 
 //traigo todos los carritos de un usuario
 router.get("/", (req, res, next) => {
@@ -107,8 +108,9 @@ router.post("/order", async (req, res, next) => {
             PaymentMethodId,
         });
 
+        
+        await sendOrderEmail(order.dataValues,req.user.dataValues,Carrito.dataValues)
         await Carrito.destroy({ where: { userId } });
-       
         res.status(201).json(order);
     } catch (err) {
         next(err);
