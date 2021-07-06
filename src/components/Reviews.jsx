@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { setReviews } from "../state/reviews";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import '../styles/Reviews.css'
+
 
 export default function Reviews() {
 
@@ -18,11 +20,11 @@ export default function Reviews() {
     <div className="reviews">
       {reviews.map((review) => {
         return (
-          <div className='review'>
-            <h2> {review.user.nick}</h2>
-            <h1>{review.comentario}</h1>
-            <p>{review.valoracion}</p>
-          </div>
+            <div className="review">
+                <h3> {review.user.nick}</h3>
+                <h3>{review.comentario}</h3>
+                <h3>{review.valoracion} ★ </h3>
+            </div>
         );
       })}
     </div>
