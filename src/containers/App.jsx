@@ -56,7 +56,7 @@ function App() {
         <Route path='/user' component={User} />
         <Route path='/checkout' component={Checkout} />
         <Route path='/edit-user' component={UpdateUser} />
-        <Route path='/category/:type' component={Categories} />
+        <Route path='/categorie/:type' component={Categories} />
         {/*<Route path='/admin' component={Admin} />*/}
         <Redirect from="*" to="/" />
       </Switch>
