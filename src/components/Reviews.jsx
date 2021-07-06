@@ -6,14 +6,14 @@ import "../styles/Reviews.css";
 export default function Reviews() {
   const [review, setReview] = useState([]);
   const { id } = useParams();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({ comentario: "", valoracion: 1 });
 
   useEffect(() => {
     axios
       .get(`/api/reviews/${id}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
+        console.log("data", data);
         setReview(data);
       });
   }, []);
@@ -32,7 +32,11 @@ export default function Reviews() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/reviews/${id}/add`, form);
+
+    axios
+      .post(`/api/reviews/${id}/add`, form)
+      .then((res) => res.data)
+      .then((data) => setReview([...review, data]));
   };
 
   return (
