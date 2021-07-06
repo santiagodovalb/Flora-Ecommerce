@@ -1,5 +1,5 @@
 const { Carrito, Products, Order } = require("../../db/models");
-// const sendOrderEmail = require("../../utils");
+const sendOrderEmail = require("../../utils");
 
 const OrderController = {
     findAll (req, res, next) {
@@ -60,11 +60,11 @@ const OrderController = {
                 PaymentMethodId,
             });
 
-            // await sendOrderEmail(
-            //     order.dataValues,
-            //     req.user.dataValues,
-            //     Carrito.dataValues
-            // );
+            await sendOrderEmail(
+                order.dataValues,
+                req.user.dataValues,
+                carritos
+            );
             await Carrito.destroy({ where: { userId } });
 
             res.status(201).json(order);
