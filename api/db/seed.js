@@ -59,6 +59,7 @@ const superAdmin = [
 ];
 
 
+
 const asynfunc = async () => {
 
     await categorias.forEach(categoria => Category.create(categoria))
