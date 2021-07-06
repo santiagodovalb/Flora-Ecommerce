@@ -4,6 +4,11 @@ const UserController = require('../controllers/userController');
 
 router.post("/register", UserController.createOne);
 router.post("/login", passport.authenticate("local"), UserController.login);
+router.get("/auth/facebook/", passport.authenticate('facebook'), UserController.login)
+router.get("/auth/facebook/callback", passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect:'/login'
+    }))
 router.post("/logout", UserController.logOut);
 router.put("/edit/:id", UserController.updateByPk);
 router.get("/me", UserController.isLogged);

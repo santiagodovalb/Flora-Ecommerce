@@ -12,11 +12,15 @@ const nodemailer = require("nodemailer");
   });
 
 async function sendOrderEmail(order, user, carrito) {
-
-    let productos=''
+    let productos = ''
     
-    productos = carrito.map(carro => {
-                return productos + `<h3></h3>`   
+    carrito.forEach(carro => {
+        return productos += `
+                            <h3>${carro.Product.nombre} </h3>
+                            <img style={width=10%} src=${carro.Product.imagen}></img>
+                            <h4>Unidades: ${carro.cantidad}</h4>
+                            <h4>Precio unidad: ${carro.precioBase}</h4>
+                            <hr/>`
     })
       
   // send mail with defined transport object
@@ -34,9 +38,10 @@ async function sendOrderEmail(order, user, carrito) {
             <div>
             <h2>Order</h2>
             <h2>Estado: ${order.estado}</h2>
-            <h2>Total: ${order.total}</h2>
             <h2>Carrito: </h2>
+            <div>${productos}</div>
             </div>
+            <h2>Total: ${order.total}</h2>
             <hr/>
         </div>`, // html body
   });
@@ -48,38 +53,3 @@ async function sendOrderEmail(order, user, carrito) {
 
 
 module.exports = sendOrderEmail
-
-// async function sendEmail() {
-
-//   // Creo un email falso para testear
-//   let fakeEmail = await nodemailer.createTestAccount();
-
-//   // create reusable transporter object using the default SMTP transport
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp.ethereal.email",
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//       user: fakeEmail.user, // generated ethereal user
-//       pass: fakeEmail.pass, // generated ethereal password
-//     },
-//   });
-
-//   // send mail with defined transport object
-//   let info = await transporter.sendMail({
-//     from: '"Test 2" <foo@example.com>', // sender address
-//     to: "paderjuegos@hotmail.com", // list of receivers
-//     subject: "Test2", // Subject line
-//     text: "Hello world?", // plain text body
-//     html: "<b>Hello world?</b>", // html body
-//   });
-
-//     console.log(info.messageId)
-  
-// }
-
-// sendEmail().catch(console.error);
-
-// module.exports = sendEmail
-
-//adzevktyfdskmbml
