@@ -1,0 +1,31 @@
+.orderTable {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 35px auto;
+}
+
+.orderTable td,
+.orderTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.orderTable tr:nth-child(even) {
+  background-color: #f31e1e;
+}
+
+.orderTable tr:nth-child(odd) {
+  background-color: #837272;
+}
+
+/* .orderTable tr:hover {
+  background-color: #ddd;
+} */
+
+.orderTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
