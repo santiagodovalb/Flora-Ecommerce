@@ -10,7 +10,11 @@ export default function OrderHistory() {
       .get("/api/shop/order")
       .then((res) => res.data)
       .then((ord) => setOrders(ord));
-  }, []);
+  }, [orders]);
+
+  const handleCancel = (id) => {
+    axios.put(`/api/shop/order/cancelled/${id}`)
+  }
 
   return (
     <div>
@@ -20,14 +24,17 @@ export default function OrderHistory() {
           <th>Pedido Id</th>
           <th>Estado</th>
           <th>Total</th>
+          <th></th>
         </tr>
         {orders.map((order) => {
           return (
+
             <tr>
               <td>{order.createdAt.slice(0, 10)}</td>
               <td>{order.id}</td>
               <td>{order.estado}</td>
               <td>$ {order.total}</td>
+              <td><button type='button' onClick={() => handleCancel(order.id)}>Cancelar pedido</button></td>
             </tr>
           );
         })}

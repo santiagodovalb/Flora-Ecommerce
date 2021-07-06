@@ -3,7 +3,8 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/SingleProduct.css";
-import Reviews from "../components/Reviews";
+import AddReview from "../components/AddReview";
+import Reviews from "./Reviews";
 import { message } from "antd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,8 +15,6 @@ function SingleProduct() {
 
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart);
-
   const user = useSelector((state) => state.user);
 
   const { id } = useParams();
@@ -25,7 +24,6 @@ function SingleProduct() {
   );
 
   useEffect(() => {
-    dispatch(setCart());
     axios
       .get(`/api/products/${id}`)
       .then((res) => res.data)
@@ -101,6 +99,8 @@ function SingleProduct() {
         </div>
       </div>
       <div>
+        <AddReview />
+        <hr />
         <Reviews />
       </div>
     </div>
