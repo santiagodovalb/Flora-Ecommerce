@@ -11,11 +11,11 @@
 }
 
 .orderTable tr:nth-child(even) {
-  background-color: #C0DEA9;
+  background-color: #c0dea9;
 }
 
 .orderTable tr:nth-child(odd) {
-  background-color: #A3CB8F;
+  background-color: #a3cb8f;
 }
 
 /* .orderTable tr:hover {
@@ -26,6 +26,6 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #D58258;
+  background-color: #d58258;
   color: white;
 }
