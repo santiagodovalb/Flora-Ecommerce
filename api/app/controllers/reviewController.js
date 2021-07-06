@@ -20,7 +20,7 @@ const ReviewController = {
     async findByProductId (req, res, next) {
         try {
             const ProductId = req.params.id;
-            const reviews = await Reviews.findAll({ where: { ProductId } });
+            const reviews = await Reviews.findAll({ where: { ProductId }, include: 'user' });
             res.status(200).json(reviews);
         } catch (err) {
             next(err);

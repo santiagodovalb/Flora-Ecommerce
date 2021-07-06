@@ -27,7 +27,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(setCart())
     axios
       .get("/api/users/me")
       .then((res) => res.data)

@@ -21,6 +21,8 @@
 }
 
 .searchInput {
+  border: none;
+  background-color: #96ac96;
   border-radius: 10px;
   height: 35px;
   width: 70%;
