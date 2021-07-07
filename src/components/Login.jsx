@@ -50,10 +50,16 @@ function Login() {
       });
   };
 
+  const handleToggle = () => {
+    
+    document.getElementById('loginAdmin').style.display = document.getElementById('loginAdmin').style.display === 'none' ? 'block' : 'none'
+    document.getElementById('loginUser').style.display= document.getElementById('loginUser').style.display === 'none' ? 'block' : 'none'
+  }
+
   return (
     <div className="login">
-      <div className='logins'>
-      <div className='userLogin'>
+      
+      <div className='userLogin'id='loginUser' style={{display: 'block'}}>
       <h1>User Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -65,7 +71,7 @@ function Login() {
         </button>
       </form>
       </div>
-      <div className='adminLogin'>
+      <div className='adminLogin'style={{display: 'none'}}id='loginAdmin'>
       <h1>Admin Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -77,10 +83,11 @@ function Login() {
         </button>
       </form>
       </div>
-      </div>
+      
       <a href="http://localhost:3001/api/users/auth/facebook/">
         <h3>Ingresar con Facebook</h3>
       </a>
+      <h3 style={{ cursor: "pointer" }} onClick={() => handleToggle()}>Ingreso para Admin</h3>
       <Link to="/register">
         <h3>Don't have an account? Register</h3>
       </Link>

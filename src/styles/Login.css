@@ -41,17 +41,17 @@
 }
 
 .adminLogin {
-    width: 50%
+    width: 100%
 }
 
 .userLogin {
-    width: 50%
+    width: 100%
 }
 
 .userLogin form {
-    width: 60%
+    width: 40%
 }
 
 .adminLogin form {
-    width: 60%
+    width: 40%
 }
