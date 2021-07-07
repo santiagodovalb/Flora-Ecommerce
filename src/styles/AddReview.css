@@ -69,3 +69,36 @@
     background-color: #a2e0cc;
     cursor: pointer;
 }
+
+.reviewText {
+    flex-direction: column;
+}
+
+.valoracion {
+    padding: 10px;
+    display: flex;
+}
+
+.valoracion > label {
+    padding-top: 20px;
+}
+
+.comentario {
+    padding: 20px;
+}
+
+.comentario > input {
+    margin-left: 10px;
+    border: none;
+    background-color: #a2e0cc;
+    border-radius: 15px 15px 15px 15px;
+    transition: width 0.5s ease;
+    width: 50%;
+}
+
+
+.comentario > input:focus {
+    width: 100%;
+    border: none;
+    outline: none;
+}

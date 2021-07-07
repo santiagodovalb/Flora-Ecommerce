@@ -14,7 +14,7 @@ export default function AddReview() {
         //e.preventDefault();
         document.getElementById("reviewText").style.display =
             document.getElementById("reviewText").style.display === "none"
-                ? "block"
+                ? "flex"
                 : "none";
     };
 
@@ -43,68 +43,72 @@ export default function AddReview() {
                 <form
                     onSubmit={handleSubmit}
                     id="reviewText"
+                    className="reviewText"
                     style={{ display: "none" }}
                 >
-                    editing
-                    <label htmlFor="comentario">Comentario</label>
-                    <input
-                        onChange={handleInput}
-                        name="comentario"
-                        type="text"
-                        placeholder="Write a review..."
-                    ></input>
-                    <label htmlFor="valoracion">Valoracion</label>
-                    <div class="rate">
+                    <div className='comentario'>
+                        <label htmlFor="comentario">Comentario</label>
                         <input
-                            onClick={handleStar}
-                            type="radio"
-                            id="star5"
-                            name="rate"
-                            value="5"
-                        />
-                        <label for="star5" title="text">
-                            5 stars
-                        </label>
-                        <input
-                            onClick={handleStar}
-                            type="radio"
-                            id="star4"
-                            name="rate"
-                            value="4"
-                        />
-                        <label for="star4" title="text">
-                            4 stars
-                        </label>
-                        <input
-                            onClick={handleStar}
-                            type="radio"
-                            id="star3"
-                            name="rate"
-                            value="3"
-                        />
-                        <label for="star3" title="text">
-                            3 stars
-                        </label>
-                        <input
-                            onClick={handleStar}
-                            type="radio"
-                            id="star2"
-                            name="rate"
-                            value="2"
-                        />
-                        <label for="star2" title="text">
-                            2 stars
-                        </label>
-                        <input
-                            onClick={handleStar}
-                            type="radio"
-                            id="star1"
-                            name="rate"
-                            value="1"
-                        />
-                        <label for="star1" title="text">
-                            1 star
-                        </label>
+                            onChange={handleInput}
+                            name="comentario"
+                            type="text"
+                            placeholder="Write a review..."
+                        ></input>
+                    </div>
+                    <div className='valoracion'>
+                        <label htmlFor="valoracion">Valoracion</label>
+                        <div class="rate">
+                            <input
+                                onClick={handleStar}
+                                type="radio"
+                                id="star5"
+                                name="rate"
+                                value="5"
+                            />
+                            <label for="star5" title="text">
+                                5 stars
+                            </label>
+                            <input
+                                onClick={handleStar}
+                                type="radio"
+                                id="star4"
+                                name="rate"
+                                value="4"
+                            />
+                            <label for="star4" title="text">
+                                4 stars
+                            </label>
+                            <input
+                                onClick={handleStar}
+                                type="radio"
+                                id="star3"
+                                name="rate"
+                                value="3"
+                            />
+                            <label for="star3" title="text">
+                                3 stars
+                            </label>
+                            <input
+                                onClick={handleStar}
+                                type="radio"
+                                id="star2"
+                                name="rate"
+                                value="2"
+                            />
+                            <label for="star2" title="text">
+                                2 stars
+                            </label>
+                            <input
+                                onClick={handleStar}
+                                type="radio"
+                                id="star1"
+                                name="rate"
+                                value="1"
+                            />
+                            <label for="star1" title="text">
+                                1 star
+                            </label>
+                        </div>
                     </div>
                     <button type="submit">Submit</button>
                 </form>
