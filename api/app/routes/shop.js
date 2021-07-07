@@ -11,5 +11,6 @@ router.get("/order", OrderController.findAll);
 router.put("/order/cancelled/:id", OrderController.cancellByPk);
 router.put("/order/delivered/:id", OrderController.deliverByPk);
 router.post("/order", OrderController.createOrder);
+router.get('/order/findAll', OrderController.findAllTotal)
 
 module.exports = router;

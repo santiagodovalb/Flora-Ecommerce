@@ -83,7 +83,7 @@ function Navbar() {
       </div>
       <div className="links">
 
-      {user.rolId === 1 || user.rolId === 3 && (
+      {user.rolId && user.rolId != 2 && (
           <Link to="/admin">
             <img className="png" src={llave} alt="adminImg" />
             <h3>- Admin</h3>

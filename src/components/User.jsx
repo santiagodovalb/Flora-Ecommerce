@@ -33,7 +33,7 @@ export default function User() {
       <button type="button" onClick={handleClick}>
         Editar info
       </button>
-      <OrderHistory />
+      <OrderHistory orders={orders}/>
     </div>
   );
 }

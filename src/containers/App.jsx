@@ -2,8 +2,6 @@ import "./App.css";
 import { Route, Redirect, Switch } from "react-router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setProducts } from "../state/products";
-import Products from "../components/Products";
 import SingleProduct from "../components/SingleProduct";
 import Cart from "../components/Cart";
 import Login from "../components/Login";
@@ -14,11 +12,9 @@ import { useSelector } from "react-redux";
 import Search from "../components/Search";
 import axios from "axios";
 import { setUser } from "../state/user";
-import { message } from "antd";
 import User from "../components/User";
 import Checkout from "../components/Checkout";
 import UpdateUser from "../components/UpdateUser";
-import { setCart } from "../state/cart";
 import Home from "../components/Home";
 import Categories from "../components/Categories";
 import SingleOrder from "../components/SingleOrder";
@@ -26,6 +22,8 @@ import Admin from "../components/Admin";
 import AdminCategories from "../components/AdminCategories";
 import AdminProducts from "../components/AdminProducts";
 import EditProduct from "../components/EditProduct";
+import AdminUsers from "../components/AdminUsers";
+import AdminOrders from "../components/AdminOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +63,8 @@ function App() {
         <Route exact path='/admin/products' component={AdminProducts} />
         <Route path='/admin/products/:id' component={EditProduct} />
         <Route path='/admin/categories' component={AdminCategories} />
+        <Route path='/admin/users' component={AdminUsers} />
+        <Route path='/admin/orders' component={AdminOrders} />
         <Redirect from="*" to="/" />
       </Switch>
       {/* <Footer />  */}
