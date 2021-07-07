@@ -27,8 +27,9 @@ function Login() {
       .post("/api/users/login", form)
       .then((res) => res.data)
       .then((user) => {
+        console.log(user)
         dispatch(setUser(user));
-        history.push("/");
+        user.rolId != 2 ? history.push("/admin") : history.push("/");
         message.success("Logged in successfully");
       })
       .then(() => {
@@ -51,7 +52,9 @@ function Login() {
 
   return (
     <div className="login">
-      <h1>Login</h1>
+      <div className='logins'>
+      <div className='userLogin'>
+      <h1>User Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input onChange={handleChange} type="text" name="email" />
@@ -61,6 +64,20 @@ function Login() {
           Submit
         </button>
       </form>
+      </div>
+      <div className='adminLogin'>
+      <h1>Admin Login</h1>
+      <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input onChange={handleChange} type="text" name="email" />
+        <label htmlFor="password">Password</label>
+        <input onChange={handleChange} type="password" name="password" />
+        <button className="submit" type="submit" value="submit">
+          Submit
+        </button>
+      </form>
+      </div>
+      </div>
       <a href="http://localhost:3001/api/users/auth/facebook/">
         <h3>Ingresar con Facebook</h3>
       </a>

@@ -16,7 +16,7 @@ export default function OrderHistory() {
       .get("/api/shop/order")
       .then((res) => res.data)
       .then((ord) => setOrders(ord));
-  }, [orders]);
+  }, []);
 
   const handleCancel = (id) => {
     axios.put(`/api/shop/order/cancelled/${id}`)

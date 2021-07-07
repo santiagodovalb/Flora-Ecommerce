@@ -22,6 +22,10 @@ import { setCart } from "../state/cart";
 import Home from "../components/Home";
 import Categories from "../components/Categories";
 import SingleOrder from "../components/SingleOrder";
+import Admin from "../components/Admin";
+import AdminCategories from "../components/AdminCategories";
+import AdminProducts from "../components/AdminProducts";
+import EditProduct from "../components/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,7 +61,10 @@ function App() {
         <Route path="/edit-user" component={UpdateUser} />
         <Route path="/categorie/:type" component={Categories} />
         <Route path="/order/:id" component={SingleOrder} />
-        {/*<Route path='/admin' component={Admin} />*/}
+        <Route exact path='/admin' component={Admin} />
+        <Route exact path='/admin/products' component={AdminProducts} />
+        <Route path='/admin/products/:id' component={EditProduct} />
+        <Route path='/admin/categories' component={AdminCategories} />
         <Redirect from="*" to="/" />
       </Switch>
       {/* <Footer />  */}

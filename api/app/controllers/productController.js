@@ -53,7 +53,7 @@ const ProductController = {
         product.precio = precio;
         product.imagen = imagen;
         product.descripcion = descripcion;
-        product.stock += stock;
+        product.stock = stock;
         return product.save();
       })
       .then((productSave) => res.status(204).send(productSave))
