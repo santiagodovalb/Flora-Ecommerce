@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router";
 import "../styles/AddReview.css";
-import { setReviews } from "../state/reviews";
+import { editReview, setReviews } from "../state/reviews";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
-export default function AddReview() {
+export default function EditReview() {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const { reviewEditing } = useSelector((store) => store.reviews);
     const [form, setForm] = useState({ comentario: "", valoracion: 1 });
+
+    useEffect(() => {
+        setForm({comentario: reviewEditing.comentario, valoracion:  reviewEditing.valoracion})
+    }, [])
 
     const handleClick = (e) => {
         //e.preventDefault();
@@ -28,16 +32,13 @@ export default function AddReview() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        axios
-            .post(`/api/reviews/${id}/add`, form)
-            .then(() => dispatch(setReviews(id)));
+        dispatch(editReview({id : reviewEditing.id, form}))
     };
 
     return (
         <div className="writeReview">
             <button onClick={handleClick} type="button">
-                Write a review
+                Edit Review
             </button>
             <div className="addReview">
                 <form
@@ -45,13 +46,13 @@ export default function AddReview() {
                     id="reviewText"
                     style={{ display: "none" }}
                 >
-                    editing
                     <label htmlFor="comentario">Comentario</label>
                     <input
                         onChange={handleInput}
                         name="comentario"
                         type="text"
                         placeholder="Write a review..."
+                        // value={reviewEditing.comentario}
                     ></input>
                     <label htmlFor="valoracion">Valoracion</label>
                     <div class="rate">
