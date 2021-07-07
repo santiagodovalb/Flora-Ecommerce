@@ -4,9 +4,9 @@ const UserController = require('../controllers/userController');
 
 router.post("/register", UserController.createOne);
 router.post("/login", passport.authenticate("local"), UserController.login);
-router.get("/auth/facebook/", passport.authenticate('facebook'), UserController.login)
+router.get("/auth/facebook/", passport.authenticate('facebook', { scope: ['email'] }), UserController.login)
 router.get("/auth/facebook/callback", passport.authenticate('facebook', {
-        successRedirect: '/',
+        successRedirect: 'http://localhost:3000/',
         failureRedirect:'/login'
     }))
 router.post("/logout", UserController.logOut);

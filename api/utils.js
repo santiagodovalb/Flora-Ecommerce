@@ -26,7 +26,7 @@ async function sendOrderEmail(order, user, carrito) {
   // send mail with defined transport object
   let info = await transporter.sendMail({
       from: '"Flora" <richard.alves1994@gmail.com>', // sender address
-    to: "richard.alves1994@gmail.com", 
+    to: user.email, 
     subject: "Orden Confirmada", // Subject line
     text: "Resumen de la orden", // plain textbody
     html: `<div className='checkoutDiv'>
@@ -45,11 +45,22 @@ async function sendOrderEmail(order, user, carrito) {
             <hr/>
         </div>`, // html body
   });
-    
-    
-    
+}
+
+async function deliveredOrderEmail(order, user) {
+  
+  let info = await transporter.sendMail({
+      from: '"Flora" <richard.alves1994@gmail.com>', // sender address
+    to: user.email, 
+    subject: "Orden Entregada", // Subject line
+    text: "Entrega de la orden", // plain textbody
+    html: `<div className='checkoutDiv'>
+            <h2>La orden con el codigo ${order.id} fue entregada</h2>
+            <h3>Gracias por su compra</h3>
+        </div>`, // html body
+  });
 }
 
 
 
-module.exports = sendOrderEmail
+module.exports = {sendOrderEmail, deliveredOrderEmail}

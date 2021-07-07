@@ -40,6 +40,16 @@ const ReviewController = {
         } catch (err) {
             next(err);
         }
+    },
+    async delete(req, res, next) {
+        try {
+            const ProductId = req.params.id;
+            const userId = req.user.dataValues.id;
+            await Reviews.destroy({ where: { ProductId, userId } })
+            res.sendStatus(204)
+        } catch (err) {
+            next(err)
+        }
     }
 
 }

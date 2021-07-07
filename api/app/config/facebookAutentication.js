@@ -14,19 +14,19 @@ module.exports = (app) => {
     {
         clientID: '647382959992261',
         clientSecret: 'b5054fc3dd2252171264270cc3911044',
-            callbackURL: "http://localhost:3001/api/users/auth/facebook/callback",
-        profileFields:['id','name','emails']
+        callbackURL: "/api/users/auth/facebook/callback",
+        
+        profileFields: ['id', 'emails', 'name']
         
     },
-    function(accessToken, refreshToken, profile, done) {
+        function (accessToken, refreshToken, profile, done) {
         User.findOne({ where: { facebookId: profile._json.id } }).then(async(user) => {
             if (user) {
                 return done(null,user)
             } else {
-                const { email, name, id } = profile._json
-                console.log(profile)
+                const {first_name,last_name,email, id} = profile._json
                 const facebookHash= await bcrypt.genSalt(10)
-                const newUser = await User.create({ nick: name, email: email, password: facebookHash, direction: '', facebookId: id })
+                const newUser = await User.create({ nick: first_name+last_name, email: email, password: facebookHash, direction: '', facebookId: id })
                 console.log('LLEGUE')
                 return done(null,newUser)
                 }
