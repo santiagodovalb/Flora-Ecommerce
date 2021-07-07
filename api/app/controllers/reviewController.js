@@ -27,25 +27,27 @@ const ReviewController = {
         }
     },
 
-    async updateByProductId (req, res, next) {
+    async updateByPk (req, res, next) {
         try {
-            const ProductId = req.params.id;
+            const id = req.params.id;
             const { comentario, valoracion } = req.body;
             const userId = req.user.dataValues.id;
             const [updates, review] = await Reviews.update(
                 { comentario, valoracion },
-                { where: { userId, ProductId }, returning: true }
+                { where: { userId, id }, returning: true }
             );
             res.status(200).json(review[0]);
         } catch (err) {
             next(err);
         }
     },
-    async delete(req, res, next) {
+
+
+    async deleteByPk (req, res, next) {
         try {
-            const ProductId = req.params.id;
+            const id = req.params.id;
             const userId = req.user.dataValues.id;
-            await Reviews.destroy({ where: { ProductId, userId } })
+            await Reviews.destroy({ where: { id, userId } })
             res.sendStatus(204)
         } catch (err) {
             next(err)

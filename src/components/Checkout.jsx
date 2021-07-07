@@ -21,7 +21,7 @@ export default function Checkout() {
         setPayments(data);
         setUsedPayment(data[0].id);
       });
-  });
+  }, []);
 
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);

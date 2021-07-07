@@ -9,6 +9,12 @@ const OrderController = {
         });
     },
 
+    findAllTotal(req, res, next) {
+        Order.findAll().then((ordenes) => {
+            res.json(ordenes)
+        })
+    },    
+
     cancellByPk (req, res, next) {
         const orderId = req.params.id;
         Order.findByPk(orderId)

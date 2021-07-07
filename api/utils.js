@@ -61,6 +61,18 @@ async function deliveredOrderEmail(order, user) {
   });
 }
 
+async function deliveredOrderEmail(order, user) {
+    let info = await transporter.sendMail({
+        from: '"Flora" <richard.alves1994@gmail.com>', // sender address
+        to: user.email,
+        subject: "Orden Entregada", // Subject line
+        text: "Entrega de la orden", // plain textbody
+        html: `<div className='checkoutDiv'>
+            <h2>La orden con el codigo ${order.id} fue entregada</h2>
+            <h3>Gracias por su compra</h3>
+        </div>`, // html body
+    });
+}
 
+module.exports = { sendOrderEmail, deliveredOrderEmail };
 
-module.exports = {sendOrderEmail, deliveredOrderEmail}

@@ -9,6 +9,7 @@ import { message } from "antd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setCart } from "../state/cart";
+import EditReview from "./editReview";
 
 function SingleProduct() {
   const [product, setProduct] = useState({});
@@ -16,6 +17,7 @@ function SingleProduct() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  const { toggleEditing } = useSelector((store) => store.reviews);
 
   const { id } = useParams();
 
@@ -80,30 +82,33 @@ function SingleProduct() {
   };
 
   return (
-    <div>
-      <div className="product">
-        <div className="productImg">
-          <img src={product.imagen} alt={product.nombre} />
-        </div>
-        <div className="productText">
-          <h1>{product.nombre}</h1>
-          <h2>{product.descripcion}</h2>
-          <p>Precio: {product.precio}</p>
-          <p>Stock: {product.stock}</p>
-          <div className="addToCart">
-            <select type="integer" id="quantity"></select>
-            <button onClick={handleClick} className="cartButton" type="button">
-              Agregar al carrito
-            </button>
-          </div>
-        </div>
-      </div>
       <div>
-        <AddReview />
-        <hr />
-        <Reviews />
+          <div className="product">
+              <div className="productImg">
+                  <img src={product.imagen} alt={product.nombre} />
+              </div>
+              <div className="productText">
+                  <h1>{product.nombre}</h1>
+                  <h2>{product.descripcion}</h2>
+                  <p>Precio: {product.precio}</p>
+                  <p>Stock: {product.stock}</p>
+                  <div className="addToCart">
+                      <select type="integer" id="quantity"></select>
+                      <button
+                          onClick={handleClick}
+                          className="cartButton"
+                          type="button"
+                      >
+                          Agregar al carrito
+                      </button>
+                  </div>
+              </div>
+          </div>
+          <div className="reviewsTotal">
+              {!toggleEditing ? <AddReview /> : <EditReview />}
+              <Reviews />
+          </div>
       </div>
-    </div>
   );
 }
 
