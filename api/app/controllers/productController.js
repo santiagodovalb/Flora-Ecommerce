@@ -39,14 +39,14 @@ const ProductController = {
       })
       .catch(next);
   },
-  create(req, res, next) {
+  createOne(req, res, next) {
     Products.create(req.body)
       .then((product) => {
         res.status(201).json(product);
       })
       .catch(next);
   },
-  destroy(req, res, next) {
+  destroyByPk(req, res, next) {
     Products.findByPk(req.params.id)
       .then((product) => {
         return product.destroy();
@@ -54,7 +54,7 @@ const ProductController = {
       .then((promiseDestroy) => res.status(204).send(promiseDestroy))
       .catch(next);
   },
-  update(req, res, next) {
+  updateByPk(req, res, next) {
     const { nombre, precio, imagen, descripcion, stock } = req.body;
     Products.findByPk(req.params.id)
       .then((product) => {
@@ -62,7 +62,7 @@ const ProductController = {
         product.precio = precio;
         product.imagen = imagen;
         product.descripcion = descripcion;
-        product.stock += stock;
+        product.stock = stock;
         return product.save();
       })
       .then((productSave) => res.status(204).send(productSave))

@@ -1,8 +1,8 @@
-.cartWrapper {
+.singleOrderWrapper {
   padding-bottom: 50px;
 }
 
-.cart {
+.singleOrder {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -13,27 +13,24 @@
   padding-bottom: 15px;
 }
 
-.cart img {
+.singleOrder img {
   height: 170px;
   width: 220px;
   border-radius: 3px;
   border: 2px solid black;
 }
 
-.cart h1 {
+.singleOrder h1,
+h1 {
   font-family: "Playfair Display", serif;
   font-size: 35px;
   color: #474747;
 }
 
-.cart h2 {
+.singleOrder h2 {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   color: #a8534b;
   letter-spacing: 0.2em;
-}
-
-.total {
-  font-size: 35px;
 }

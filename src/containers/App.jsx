@@ -15,19 +15,22 @@ import Search from "../components/Search";
 import axios from "axios";
 import { setUser } from "../state/user";
 import { message } from "antd";
-import User from '../components/User'
-import Checkout from '../components/Checkout'
+import User from "../components/User";
+import Checkout from "../components/Checkout";
 import UpdateUser from "../components/UpdateUser";
-import { setCart } from '../state/cart';
+import { setCart } from "../state/cart";
 import Home from "../components/Home";
 import Categories from "../components/Categories";
-
+import SingleOrder from "../components/SingleOrder";
+import Admin from "../components/Admin";
+import AdminCategories from "../components/AdminCategories";
+import AdminProducts from "../components/AdminProducts";
+import EditProduct from "../components/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(setCart())
     axios
       .get("/api/users/me")
       .then((res) => res.data)
@@ -53,11 +56,15 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/search/:search" component={Search} />
-        <Route path='/user' component={User} />
-        <Route path='/checkout' component={Checkout} />
-        <Route path='/edit-user' component={UpdateUser} />
-        <Route path='/category/:type' component={Categories} />
-        {/*<Route path='/admin' component={Admin} />*/}
+        <Route path="/user" component={User} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/edit-user" component={UpdateUser} />
+        <Route path="/categorie/:type" component={Categories} />
+        <Route path="/order/:id" component={SingleOrder} />
+        <Route exact path='/admin' component={Admin} />
+        <Route exact path='/admin/products' component={AdminProducts} />
+        <Route path='/admin/products/:id' component={EditProduct} />
+        <Route path='/admin/categories' component={AdminCategories} />
         <Redirect from="*" to="/" />
       </Switch>
       {/* <Footer />  */}

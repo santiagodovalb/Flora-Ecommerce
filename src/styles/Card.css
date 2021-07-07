@@ -1,8 +1,11 @@
 .wrapper {
   display: flex;
   border-radius: 7px 7px 7px 7px;
-  box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-  border: 2px solid black;
+  box-shadow: 5px 5px 30px 3px rgba(192, 185, 192, 0.76);
+}
+
+.wrapper:hover {
+  box-shadow: 5px 5px 15px 24px rgba(162,224,204,0.85);
 }
 
 .product-img {
@@ -25,7 +28,7 @@
   height: 256px;
   width: 50%;
   border-radius: 0 7px 10px 7px;
-  background-color: #ffffff;
+  background-color: #c5bea8fb;
 }
 
 .product-text {
@@ -84,11 +87,11 @@ span {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: #ffffff;
-  background-color: #9cebd5;
+  background-color: #96ac96;
   cursor: pointer;
   outline: none;
 }
 
 .product-price-btn button:hover {
-  background-color: #79b0a1;
+  background-color: rgba(162,224,204,0.85);
 }

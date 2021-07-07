@@ -22,7 +22,7 @@ User.belongsTo(Rol,{as:'rol'})
 // User.belongsTo(PaymentMethod,{as:'paymentMethod'}) 
 
 User.hasMany(Reviews,{as:'review'})
-Reviews.belongsTo(User,{as:'user'})
+Reviews.belongsTo(User, {as: 'user'})
 
 Carrito.belongsTo(User,{as:'user'}) 
 Carrito.belongsTo(Products);

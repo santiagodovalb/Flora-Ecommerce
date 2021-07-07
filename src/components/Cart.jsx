@@ -15,6 +15,10 @@ function Cart() {
     const history = useHistory()
     const cartProducts = useSelector(state => state.cart)
 
+
+    useEffect(() => {
+        dispatch(setCart())
+    }, [])
     
 
     const calcularTotal = () => {
