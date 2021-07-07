@@ -33,7 +33,7 @@ const UserController = {
     findAll(req, res, next) {
         User.findAll()
             .then((users) => {
-                res.staus(200).send(users);
+                res.status(200).send(users);
             })
             .catch(next);
     },
