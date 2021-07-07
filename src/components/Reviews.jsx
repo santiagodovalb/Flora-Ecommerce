@@ -20,7 +20,7 @@ export default function Reviews() {
         return (
           <div className='review'>
             <h2> {review.user.nick}</h2>
-            <h1>{review.comentario}</h1>
+            <p>{review.comentario}</p>
             <p>{review.valoracion}</p>
           </div>
         );
