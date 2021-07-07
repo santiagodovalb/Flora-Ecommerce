@@ -1,12 +1,6 @@
 const router = require("express").Router();
-const { PaymentMethod } = require("../../db/models");
+const PaymentMethodController = require("../controllers/paymentMethodController");
 
-router.get("/", (req, res, next) => {
-    PaymentMethod.findAll()
-        .then((PaymentMethods) => {
-            res.status(200).json(PaymentMethods);
-        })
-        .catch(next);
-});
+router.get("/", PaymentMethodController.findAll);
 
 module.exports = router;

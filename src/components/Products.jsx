@@ -38,7 +38,7 @@ function Products() {
         {location.pathname.includes('search') && <h1 className="productsTitle">Search results</h1>}
         {location.pathname.includes('categorie') && <h1 className="productsTitle">{categorie}</h1>}
       </div>
-      <hr/>
+  
       <div className="productDiv">
         {products && products.map((product) => {
           return (

@@ -1,71 +1,21 @@
 const router = require("express").Router();
 const passport = require("passport");
-const { User } = require("../../db/models");
+const UserController = require('../controllers/userController');
 
-router.post("/register", (req, res, next) => {
-    User.create({
-        nick: req.body.nick,
-        email: req.body.email,
-        password: req.body.password,
-        direction: req.body.direction,
-        phone: req.body.phone,
-    })
-        .then((user) => res.status(201).send(user))
-        .catch(next);
-});
-
-router.post("/login", passport.authenticate("local"), (req, res, next) => {
-    res.send(req.user);
-});
-
-router.post("/logout", (req, res, next) => {
-  req.logOut();
-  res.sendStatus(200);
-});
-
-router.put("/edit/:id", (req, res, next) => {
-    User.update(req.body, { where: { id: req.params.id }, returning: true })
-        .then(([updated, user]) => {
-            res.status(201).json(user[0])
-        })
-        .catch(next);
-});
-
-router.get("/me", (req, res, next) => {
-  console.log(req.user);
-  if (!req.user) return res.sendStatus(401);
-  return res.send(req.user);
-});
+router.post("/register", UserController.createOne);
+router.post("/login", passport.authenticate("local"), UserController.login);
+router.get("/auth/facebook/", passport.authenticate('facebook'), UserController.login)
+router.get("/auth/facebook/callback", passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect:'/login'
+    }))
+router.post("/logout", UserController.logOut);
+router.put("/edit/:id", UserController.updateByPk);
+router.get("/me", UserController.isLogged);
 
 //rutas para admins
-
-router.get("/allUsers", (req, res, next) => {
-    User.findAll()
-        .then((users) => {
-            res.staus(200).send(users);
-        })
-        .catch(next);
-});
-
-router.put("/allUsers/:userId", (req, res, next) => {
-    User.update({ rolId: 1 }, { where: { id: req.params.userId } })
-        .then(() => {
-            res.sendStatus(200);
-        })
-        .catch(next);
-});
-
-router.delete("/allUsers/:userId", (req, res, next) => {
-    const usuarioId = req.params.userId;
-    User.destroy({
-        where: {
-            id: usuarioId,
-        },
-    })
-        .then(() => {
-            res.sendStatus(200);
-        })
-        .catch(next);
-});
+router.get("/allUsers", UserController.findAll);
+router.put("/allUsers/:userId", UserController.updateAdminByPk);
+router.delete("/allUsers/:userId", UserController.destroyUserByPk);
 
 module.exports = router;

@@ -21,6 +21,10 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleAdminSubmit = () => {
+    return
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -51,6 +55,7 @@ function Login() {
 
   return (
     <div className="login">
+      <div className='userLogin'>
       <h1>Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -61,6 +66,22 @@ function Login() {
           Submit
         </button>
       </form>
+      </div>
+      <h1>Admin Login</h1>
+      <div className='adminLogin'>
+      <form className="form" onSubmit={handleAdminSubmit}>
+        <label htmlFor="email">Email</label>
+        <input onChange={handleChange} type="text" name="email" />
+        <label htmlFor="password">Password</label>
+        <input onChange={handleChange} type="password" name="password" />
+        <button className="submit" type="submit" value="submit">
+          Submit
+        </button>
+      </form>
+      </div>
+      <a href="http://localhost:3001/api/users/auth/facebook/">
+        <h3>Ingresar con facebook</h3>
+      </a>
       <Link to="/register">
         <h3>Don't have an account? Register</h3>
       </Link>

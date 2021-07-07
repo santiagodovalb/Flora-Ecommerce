@@ -30,6 +30,9 @@ User.init(
         salt: {
             type: S.STRING,
         },
+        facebookId: {
+            type: S.STRING
+        }
     },
     { sequelize: db, timestamps: false, modelName: "users" }
 );
