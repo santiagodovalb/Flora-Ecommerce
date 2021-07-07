@@ -79,7 +79,7 @@ function Login() {
       </div>
       </div>
       <a href="http://localhost:3001/api/users/auth/facebook/">
-        <h3>Ingresar con facebook</h3>
+        <h3>Ingresar con Facebook</h3>
       </a>
       <Link to="/register">
         <h3>Don't have an account? Register</h3>

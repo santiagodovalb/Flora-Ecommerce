@@ -42,6 +42,7 @@ const ReviewController = {
         }
     },
 
+
     async deleteByPk (req, res, next) {
         try {
             const id = req.params.id;

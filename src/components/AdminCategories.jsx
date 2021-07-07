@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { setCategories } from '../state/categories'
+import Admin from "../components/Admin";
 
 export default function AdminCategories() {
 
@@ -58,6 +59,7 @@ export default function AdminCategories() {
 
     return (
         <div>
+            <Admin/>
             <button onClick={toggleInput} type='button'>Add categorie</button>
             <form onSubmit={handleAdd} id='categorie' style={{display:'none'}}>
             <input onChange={handleAddChange} type='text'></input>

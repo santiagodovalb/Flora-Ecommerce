@@ -6,10 +6,15 @@ import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../state/products'
 import { useEffect } from 'react'
+import Admin from "../components/Admin";
+import FormProduct from './FormProduct'
+import EditProduct from './EditProduct'
+
 
 export default function AdminProducts() {
 
     const [productForm, setProductForm] = useState({})
+    const [id, setId] = useState()
     const history = useHistory();
     const dispatch = useDispatch()
     const products = useSelector(state => state.products)
@@ -36,24 +41,44 @@ export default function AdminProducts() {
         document.getElementById('addProduct').style.display = document.getElementById('addProduct').style.display === 'none' ? 'block' : 'none'
     }
 
-    const handleEdit = () => {
-        document.getElementById('editProducts').style.display = document.getElementById('editProducts').style.display === 'none' ? 'block' : 'none'
+    const handleProductsToEdit = () => {
+        document.getElementById('ProductsToEdit').style.display = document.getElementById('ProductsToEdit').style.display === 'none' ? 'block' : 'none'
     }
 
-    const editPush = (id) => {
-        history.push(`/admin/products/${id}`)
+    const editToggle = (id) => {
+       // history.push(`/admin/products/${id}`)
+        setId(id)
+        document.getElementById('EditProduct').style.display = document.getElementById('EditProduct').style.display === 'none' ? 'block' : 'none'
     }
 
     const categories = useSelector(state => state.categories)
 
     return (
         <div>
-            {console.log('prods', products)}
+            <Admin/>
             <h1>Manage Products</h1>
             <button onClick={handleAdd} type='button'>Add product</button>
-            <button onClick={handleEdit} type='button'>Edit product</button>
+            <button onClick={handleProductsToEdit} type='button'>Edit product</button>
 
-            <form id='addProduct' onSubmit={handleSubmit} style={{display: 'none'}}>
+            <div style={{display: 'none'}} id='addProduct'>
+                <FormProduct handleSubmit={handleSubmit} handleChange={handleChange} categories={categories} />
+            </div>
+            <hr />
+            <div style={{display: 'none'}} id='ProductsToEdit'>
+            {products.map(product => {
+                return (
+                    <button onClick={() => editToggle(product.id)} type='button'>{product.nombre}</button>
+                )
+            })}
+                <div style={{display: 'none'}} id='EditProduct'>
+                    <EditProduct id={id}/>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+{/* <form id='addProduct' onSubmit={handleSubmit} style={{display: 'none'}}>
                 <label type="text" for='nombre'>Nombre:</label>
                 <input onChange={handleChange} name='nombre'></input>
 
@@ -79,15 +104,4 @@ export default function AdminProducts() {
                     })}
                 </select>
                 <button type='submit'>Añadir producto</button>
-            </form>
-            <div style={{display: 'none'}} id='editProducts'>
-            {products.map(product => {
-                return (
-                    <button onClick={() => editPush(product.id)} type='button'>{product.nombre}</button>
-                )
-            })}
-            </div>
-        </div>
-    )
-}
-
+            </form> */}
