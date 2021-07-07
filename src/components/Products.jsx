@@ -11,15 +11,8 @@ import { useHistory } from "react-router";
 
 function Products() {
 
-  const [categorias, setCategorias] = useState([])
   const history = useHistory();
 
-  useEffect(() => {
-    axios.get('/api/category')
-    .then(res => res.data)
-    .then(cats => setCategorias(cats))
-    .catch(err => console.log(err))
-  }, [])
 
   const location = useLocation()
   const products = useSelector(state => state.products)

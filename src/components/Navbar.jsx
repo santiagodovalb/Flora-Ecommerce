@@ -13,18 +13,17 @@ import userIcon from "../assets/userIcon.png";
 import registerIcon from "../assets/registerIcon.png";
 import lupa from "../assets/lupa.png";
 import logOut from "../assets/logout.png";
+import llave from '../assets/llave.png'
+import { setCategories } from "../state/categories";
 
 function Navbar() {
   const [search, setSearch] = useState("");
-  const [categorias, setCategorias] = useState([]);
+  const categorias = useSelector(state => state.categories)
 
   useEffect(() => {
-    axios
-      .get("/api/category")
-      .then((res) => res.data)
-      .then((cats) => setCategorias(cats))
-      .catch((err) => console.log(err));
+    dispatch(setCategories())
   }, []);
+  
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -83,6 +82,14 @@ function Navbar() {
         </div>
       </div>
       <div className="links">
+
+      {user.rolId === 1 || user.rolId === 3 && (
+          <Link to="/admin">
+            <img className="png" src={llave} alt="adminImg" />
+            <h3>- Admin</h3>
+          </Link>
+        )}
+
         {!user.nick && (
           <Link to="/login">
             <img className="png" src={userIcon} alt="searchImg" />

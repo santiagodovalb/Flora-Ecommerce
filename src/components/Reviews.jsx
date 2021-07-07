@@ -18,7 +18,7 @@ export default function Reviews() {
 
   return (
     <div className="reviews">
-      {reviews.map((review) => {
+      {reviews?.map((review) => {
         return (
             <div className="review">
                 <h3> {review.user.nick}</h3>
