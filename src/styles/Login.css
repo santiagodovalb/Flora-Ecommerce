@@ -33,3 +33,25 @@
     border-radius: 5px;
     margin: 25px auto
 }
+
+.logins {
+    display: flex;
+    width: 80%;
+    margin: 50px auto
+}
+
+.adminLogin {
+    width: 50%
+}
+
+.userLogin {
+    width: 50%
+}
+
+.userLogin form {
+    width: 60%
+}
+
+.adminLogin form {
+    width: 60%
+}

@@ -25,6 +25,7 @@ export default function Reviews() {
     };
 
 
+
     return (
         <div className="reviews">
             {reviews?.map((review) => {
@@ -54,4 +55,5 @@ export default function Reviews() {
             })}
         </div>
     );
+
 }

@@ -33,12 +33,13 @@ const UserController = {
     findAll(req, res, next) {
         User.findAll()
             .then((users) => {
-                res.staus(200).send(users);
+                res.status(200).send(users);
             })
             .catch(next);
     },
     updateAdminByPk(req, res, next) {
         const rolId = req.body.rolId;
+        console.log('ROLID', rolId)
         if (req.user.dataValues.id !== req.params.userId) {
             User.update({ rolId }, { where: { id: req.params.userId } })
                 .then(() => {

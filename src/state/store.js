@@ -4,6 +4,8 @@ import { productsReducer } from "./products";
 import { userReducer } from "./user";
 import { cartReducer } from "./cart";
 import { singleOrderReducer } from "./order";
+import { categoriesReducer } from "./categories";
+import { allOrdersReducer } from "./allOrders";
 import { reviewsReducer } from "./reviews";
 
 const store = configureStore({
@@ -12,8 +14,11 @@ const store = configureStore({
     products: productsReducer,
     user: userReducer,
     cart: cartReducer,
+    allOrders: allOrdersReducer,
     singleOrder: singleOrderReducer,
+    categories: categoriesReducer,
     reviews: reviewsReducer,
+
   },
 });
 
