@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/sidebar.css";
-import { Link } from "react-router-dom";
 
 function Sidebar() {
   const prods = ["prod1", "prod2", "prod3", "prod4"];

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import "../styles/AddReview.css";
 import { setReviews } from "../state/reviews";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function AddReview() {
     const dispatch = useDispatch();
@@ -57,7 +57,7 @@ export default function AddReview() {
                     </div>
                     <div className='valoracion'>
                         <label htmlFor="valoracion">Valoracion</label>
-                        <div class="rate">
+                        <div className="rate">
                             <input
                                 onClick={handleStar}
                                 type="radio"
@@ -65,7 +65,7 @@ export default function AddReview() {
                                 name="rate"
                                 value="5"
                             />
-                            <label for="star5" title="text">
+                            <label htmlFor="star5" title="text">
                                 5 stars
                             </label>
                             <input
@@ -75,7 +75,7 @@ export default function AddReview() {
                                 name="rate"
                                 value="4"
                             />
-                            <label for="star4" title="text">
+                            <label htmlFor="star4" title="text">
                                 4 stars
                             </label>
                             <input
@@ -85,7 +85,7 @@ export default function AddReview() {
                                 name="rate"
                                 value="3"
                             />
-                            <label for="star3" title="text">
+                            <label htmlFor="star3" title="text">
                                 3 stars
                             </label>
                             <input
@@ -95,7 +95,7 @@ export default function AddReview() {
                                 name="rate"
                                 value="2"
                             />
-                            <label for="star2" title="text">
+                            <label htmlFor="star2" title="text">
                                 2 stars
                             </label>
                             <input
@@ -105,7 +105,7 @@ export default function AddReview() {
                                 name="rate"
                                 value="1"
                             />
-                            <label for="star1" title="text">
+                            <label htmlFor="star1" title="text">
                                 1 star
                             </label>
                         </div>

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../styles/AddReview.css";
-import { editReview, setReviews } from "../state/reviews";
+import { editReview } from "../state/reviews";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+
 
 export default function EditReview() {
     const dispatch = useDispatch();
-    const { id } = useParams();
     const { reviewEditing } = useSelector((store) => store.reviews);
     const [form, setForm] = useState({ comentario: "", valoracion: 1 });
 
     useEffect(() => {
         setForm({comentario: reviewEditing.comentario, valoracion:  reviewEditing.valoracion})
-    }, [])
+    }, [reviewEditing.comentario, reviewEditing.valoracion])
 
     const handleClick = (e) => {
         //e.preventDefault();
