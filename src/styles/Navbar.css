@@ -30,6 +30,10 @@
   padding-left: 5px;
 }
 
+.searchInput::placeholder {
+  color: #f4f1de
+}
+
 .searchInput:focus {
   width: 90%;
   outline: none;
