@@ -1,4 +1,6 @@
 import React from 'react'
+import '../styles/FormProduct.css'
+
 
 export default function FormProduct({product,handleChange,handleSubmit,categories}) {
 

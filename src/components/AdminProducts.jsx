@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import Admin from "../components/Admin";
 import FormProduct from './FormProduct'
 import EditProduct from './EditProduct'
+import '../styles/AdminProducts.css'
 
 
 export default function AdminProducts() {
@@ -57,8 +58,8 @@ export default function AdminProducts() {
         <div>
             <Admin/>
             <h1>Manage Products</h1>
-            <button onClick={handleAdd} type='button'>Add product</button>
-            <button onClick={handleProductsToEdit} type='button'>Edit product</button>
+            <button className="admin-product-btn" onClick={handleAdd} type='button'>Add product</button>
+            <button className="admin-product-btn" onClick={handleProductsToEdit} type='button'>Edit product</button>
 
             <div style={{display: 'none'}} id='addProduct'>
                 <FormProduct handleSubmit={handleSubmit} handleChange={handleChange} categories={categories} />
@@ -67,7 +68,7 @@ export default function AdminProducts() {
             <div style={{display: 'none'}} id='ProductsToEdit'>
             {products.map(product => {
                 return (
-                    <button onClick={() => editToggle(product.id)} type='button'>{product.nombre}</button>
+                    <button className="admin-productName-btn" onClick={() => editToggle(product.id)} type='button'>{product.nombre}</button>
                 )
             })}
                 <div style={{display: 'none'}} id='EditProduct'>
@@ -77,3 +78,4 @@ export default function AdminProducts() {
         </div>
     )
 }
+
