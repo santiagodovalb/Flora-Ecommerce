@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/Navbar.css";
-import "../assets/logo.png";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Card from "./Card";
 import "../styles/Products.css";
 import { useLocation } from 'react-router'
-import bodyLogo from '../assets/logo.png'
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useHistory } from "react-router";
@@ -25,7 +24,6 @@ function Products() {
   return (
     <div className='products'>
       <div className='logoTitle'>
-        <img src={bodyLogo} alt="logo" />
         {console.log(categorie)}
         {location.pathname === '/' && <h1 className="productsTitle">Our Products</h1>}
         {location.pathname.includes('search') && <h1 className="productsTitle">Search results</h1>}
