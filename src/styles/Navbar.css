@@ -1,7 +1,7 @@
 /* Add a black background color to the top navigation */
 .topnav {
   display: flex;
-  background-color: #a2e0cc;
+  background-color: #ccd5ae;
   height: 140px;
   align-items: center;
   justify-content: space-evenly;
@@ -12,7 +12,7 @@
 }
 
 .logo {
-  height: 80px;
+  height: 100px;
   background: transparent;
 }
 

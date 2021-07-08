@@ -24,10 +24,12 @@ export default function Reviews() {
         });
     };
 
-
-
+    const promedio = reviews.reduce((accumulator, currentValue) => accumulator + currentValue.valoracion, 0) / reviews.length
+   
     return (
         <div className="reviews">
+            {console.log('VALS', promedio)}
+            <h1>Promedio: {Math.round(promedio)} ★</h1>
             {reviews?.map((review) => {
                 return (
                     <div className="review">
