@@ -17,9 +17,9 @@
     border-radius: 3px;
 }
 
-.productImg img:hover {
+/* .productImg img:hover {
   box-shadow: 5px 5px 15px 24px rgba(162,224,204,0.85);
-}
+} */
 
 .productText {
     width: 600px;
@@ -62,7 +62,7 @@
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: #5e5e5e;
-    background-color: #9cebd5;
+    background-color: #ccd5ae;
     cursor: pointer;
     outline: none;
   }

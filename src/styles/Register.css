@@ -22,14 +22,29 @@
     border-radius: 10px;
 }
 
-.form input:focus {
-    outline: none
+/* .form input:focus {
+    outline: none;
+    border: none;
+} */
+
+.form label {
+    font-family: 'Spartan', sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
 }
 
 .submit {
-    color: #a2e0cc;
-    background-color: #237543;
-    width: 30%;
-    border-radius: 5px;
+    font-family: 'Spartan', sans-serif;
+    font-weight: 400;
+    font-size:1.5em;
+    width: 60%;
+    color: #0f0f0f;
+    background-color: transparent;
+    border-radius: 10px;
     margin: 25px auto
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #ccd5ae;
 }

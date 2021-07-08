@@ -5,7 +5,7 @@
 }
 
 .wrapper:hover {
-  box-shadow: 5px 5px 15px 24px rgba(162,224,204,0.85);
+  box-shadow: 5px 5px 15px 15px #c3c1b3;
 }
 
 .product-img {
