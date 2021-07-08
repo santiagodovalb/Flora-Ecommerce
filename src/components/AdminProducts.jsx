@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import Admin from "../components/Admin";
 import FormProduct from './FormProduct'
 import EditProduct from './EditProduct'
+import '../styles/AdminProducts.css'
 
 
 export default function AdminProducts() {
@@ -57,8 +58,8 @@ export default function AdminProducts() {
         <div>
             <Admin/>
             <h1>Manage Products</h1>
-            <button onClick={handleAdd} type='button'>Add product</button>
-            <button onClick={handleProductsToEdit} type='button'>Edit product</button>
+            <button className="admin-product-btn" onClick={handleAdd} type='button'>Add product</button>
+            <button className="admin-product-btn" onClick={handleProductsToEdit} type='button'>Edit product</button>
 
             <div style={{display: 'none'}} id='addProduct'>
                 <FormProduct handleSubmit={handleSubmit} handleChange={handleChange} categories={categories} />
@@ -67,7 +68,7 @@ export default function AdminProducts() {
             <div style={{display: 'none'}} id='ProductsToEdit'>
             {products.map(product => {
                 return (
-                    <button onClick={() => editToggle(product.id)} type='button'>{product.nombre}</button>
+                    <button className="admin-productName-btn" onClick={() => editToggle(product.id)} type='button'>{product.nombre}</button>
                 )
             })}
                 <div style={{display: 'none'}} id='EditProduct'>
@@ -78,30 +79,3 @@ export default function AdminProducts() {
     )
 }
 
-{/* <form id='addProduct' onSubmit={handleSubmit} style={{display: 'none'}}>
-                <label type="text" for='nombre'>Nombre:</label>
-                <input onChange={handleChange} name='nombre'></input>
-
-                <label type="text" for='precio'>Precio:</label>
-                <input onChange={handleChange} name='precio'></input>
-
-                <label type="text" for='imagen'>URL Imagen:</label>
-                <input onChange={handleChange} name='imagen'></input>
-
-                <label for='descripcion'>Descripcion:</label>
-                <input onChange={handleChange} type='text' name='descripcion'></input>
-
-                <label for='stock'>Stock:</label>
-                <input onChange={handleChange} type="text" name='stock'></input>
-
-                <label for='categoria'>Categoria:</label>
-                <select onChange={handleChange} name='CategoryId'>
-                    <option>Seleccionar categoria</option>
-                    {categories.map(categorie => {
-                        return (
-                            <option value={categorie.id}>{categorie.type}</option>
-                        )
-                    })}
-                </select>
-                <button type='submit'>Añadir producto</button>
-            </form> */}

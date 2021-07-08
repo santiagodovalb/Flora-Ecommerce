@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import Admin from './Admin'
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -38,8 +39,8 @@ export default function AdminUsers() {
 
   return (
     <div>
-      {console.log(users)}
-      <h1>hola</h1>
+      <Admin/>
+      <h1>Users</h1>
       {users.map((user) => {
         return (
           <div>

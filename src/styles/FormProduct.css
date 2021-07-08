@@ -1,0 +1,11 @@
+#addProduct{
+    display:flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+    margin: 30px auto;
+}
+
+#addProduct input{
+border-radius: 15px 15px 15px 15px;
+}

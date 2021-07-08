@@ -1,0 +1,32 @@
+.admin-page-btn{
+font-family: "Trocchi", serif;
+  margin: 0 auto;
+  font-size: 2em;
+  font-weight: lighter;
+  color: #474747;
+  background-color: #ccd5ae;
+  /* -webkit-border-radius: 10px 1px 1px 1px; */
+border-radius: 15px 15px 15px 15px;
+}
+
+.admin-product-btn{
+  font-family: "Trocchi", serif;
+  margin: 0 auto;
+  font-size: 1.5em;
+  font-weight: lighter;
+  color: #474747;
+  background-color: #ccd5ae;
+  /* -webkit-border-radius: 10px 1px 1px 1px; */
+border-radius: 15px 15px 15px 15px;
+}
+
+.admin-productName-btn{
+  font-family: "Trocchi", serif;
+  margin: 0 auto;
+  font-size: 1em;
+  font-weight: lighter;
+  color: #474747;
+  background-color: #ccd5ae;
+  /* -webkit-border-radius: 10px 1px 1px 1px; */
+  border-radius: 15px 15px 15px 15px;
+}

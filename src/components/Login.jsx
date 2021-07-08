@@ -5,6 +5,7 @@ import { setUser } from "../state/user";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../styles/Login.css";
+import "../styles/Admin.css";
 import axios from "axios";
 import { message } from "antd";
 
