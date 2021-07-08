@@ -30,7 +30,7 @@ function Login() {
       .then((user) => {
         console.log(user)
         dispatch(setUser(user));
-        user.rolId != 2 ? history.push("/admin") : history.push("/");
+        user.rolId !== 2 ? history.push("/admin") : history.push("/");
         message.success("Logged in successfully");
       })
       .then(() => {

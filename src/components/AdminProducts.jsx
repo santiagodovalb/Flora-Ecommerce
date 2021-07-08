@@ -22,7 +22,7 @@ export default function AdminProducts() {
 
     useEffect(() => {
         dispatch(setProducts())
-    }, [])
+    }, [dispatch])
 
     const handleChange = (e) => {
         setProductForm({...productForm, [e.target.name]: e.target.value})

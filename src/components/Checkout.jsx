@@ -35,10 +35,11 @@ export default function Checkout() {
     axios
       .post("/api/shop/order", { PaymentMethodId: usedPayment })
       .then((res) => res.data)
-      .then((order) => {
+      .then(() => {
         dispatch(setCart());
-        history.push("/user");
       });
+
+      history.push("/user");
   };
 
   const handleChange = (e) => {
@@ -58,7 +59,7 @@ export default function Checkout() {
       <div className="checkoutProds">
         {cart.map((product) => {
           return (
-            <div className="eachProd">
+            <div key={product.id} className="eachProd">
               <img src={product.Product.imagen} alt="prodImage" />
               <p>{product.cantidad}</p>
             </div>

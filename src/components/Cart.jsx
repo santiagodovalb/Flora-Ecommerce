@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { setCart } from '../state/cart';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import '../styles/Cart.css';
 import { message } from 'antd';
 import axios from 'axios';
@@ -18,7 +18,7 @@ function Cart() {
 
     useEffect(() => {
         dispatch(setCart())
-    }, [])
+    }, [dispatch])
     
 
     const calcularTotal = () => {

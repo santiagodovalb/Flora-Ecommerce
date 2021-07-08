@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../styles/SingleOrder.css";
@@ -11,7 +11,7 @@ export default function SingleOrder() {
       <h1>Pedido orden numero {singleOrder.id}</h1>
       {singleOrder.carritos.map((order) => {
         return (
-          <div className="singleOrder">
+          <div key={order.id} className="singleOrder">
             <Link to={`/products/${1}`}>
               <img src={order.Product.imagen} alt={"imagen de producto"} />
             </Link>
