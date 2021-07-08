@@ -18,9 +18,9 @@
   background-color: #a3cb8f;
 }
 
-/* .orderTable tr:hover {
-  background-color: #ddd;
-} */
+.orderTable tbody {
+  cursor: pointer;
+}
 
 .orderTable th {
   padding-top: 12px;

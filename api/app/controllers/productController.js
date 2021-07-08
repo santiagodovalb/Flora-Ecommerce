@@ -13,9 +13,18 @@ const ProductController = {
     const { nombre } = req.query;
     Products.findAll({
       where: {
-        nombre: {
-          [Op.iLike]: `%${nombre}%`,
-        },
+        [Op.or]: [
+          {
+            nombre: {
+              [Op.iLike]: `%${nombre}%`,
+            },
+          },
+          {
+            descripcion: {
+              [Op.like]: `%${nombre}%`,
+            },
+          },
+        ],
       },
     })
       .then((arrayProducts) => {

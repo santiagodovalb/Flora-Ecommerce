@@ -1,5 +1,4 @@
 import React from 'react'
-import Categories from './Categories'
 import Products from './Products'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../state/products'
@@ -11,7 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(setProducts());
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

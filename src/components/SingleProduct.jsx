@@ -37,7 +37,7 @@ function SingleProduct() {
         }
         document.getElementById("quantity").innerHTML = options;
       });
-  }, []);
+  }, [id]);
 
   const handleClick = (e) => {
     e.preventDefault();

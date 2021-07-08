@@ -18,13 +18,13 @@ import { setCategories } from "../state/categories";
 function Navbar() {
   const [search, setSearch] = useState("");
   const categorias = useSelector(state => state.categories)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setCategories())
-  }, []);
+  }, [dispatch]);
   
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -67,14 +67,14 @@ function Navbar() {
           />
         </form>
       </div>
-      <div class="dropdown">
-        <button class="dropbtn">≡ Categories</button>
-        <div class="dropdown-content">
+      <div className="dropdown">
+        <button className="dropbtn">≡ Categories</button>
+        <div className="dropdown-content">
           <Link to='/'>
           <p>todas</p>
           </Link>
           {categorias.map((categorie) => {
-            return <Link to={`/categorie/${categorie.type}`}>
+            return <Link key={categorie.id} to={`/categorie/${categorie.type}`}>
               <p>{categorie.type}</p>
             </Link>
           })}
@@ -82,7 +82,7 @@ function Navbar() {
       </div>
       <div className="links">
 
-      {user.rolId && user.rolId != 2 && (
+      {user.rolId && user.rolId !== 2 && (
           <Link to="/admin">
             <img className="png" src={llave} alt="adminImg" />
             <h3>- Admin</h3>

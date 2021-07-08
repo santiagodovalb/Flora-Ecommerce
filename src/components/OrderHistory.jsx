@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import "../styles/OrderHistory.css";
 import { useHistory, useLocation } from "react-router";
 import { setSingleOrder } from "../state/order";
 import { useDispatch } from "react-redux";
 import { setAllOrders } from "../state/allOrders";
+import { setUserOrders} from '../state/userOrders'
 
 export default function OrderHistory({ orders }) {
 
@@ -16,7 +17,7 @@ export default function OrderHistory({ orders }) {
     e.stopPropagation()
     e.preventDefault();
     axios.put(`/api/shop/order/cancelled/${id}`)
-    .then(() => dispatch(setAllOrders()))
+    .then(() => location.pathname.includes('admin') ? dispatch(setAllOrders()) : dispatch(setUserOrders()))
   };
 
   const handleClick = (ord) => {
@@ -33,8 +34,8 @@ export default function OrderHistory({ orders }) {
 
   return (
     <div>
-      {console.log('algo')}
       <table className="orderTable">
+        <thead>
         <tr>
           <th>Creado</th>
           <th>Pedido Id</th>
@@ -43,8 +44,10 @@ export default function OrderHistory({ orders }) {
           <th></th>
           {location.pathname.includes("admin") && <th></th>}
         </tr>
+        </thead>
         {orders.map((order) => {
           return (
+            <tbody key={order.id}>
             <tr onClick={() => handleClick(order)}>
               <td>{order.createdAt.slice(0, 10)}</td>
               <td>{order.id}</td>
@@ -69,6 +72,7 @@ export default function OrderHistory({ orders }) {
                 </td>
               )}
             </tr>
+            </tbody>
           );
         })}
       </table>

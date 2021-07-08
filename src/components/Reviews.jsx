@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { editing, setReviews } from "../state/reviews";
 import { useDispatch } from "react-redux";
@@ -28,8 +28,7 @@ export default function Reviews() {
    
     return (
         <div className="reviews">
-            {console.log('VALS', promedio)}
-            <h1>Promedio: {Math.round(promedio)} ★</h1>
+            {promedio ? <h2>Promedio: {Math.round(promedio)} ★</h2> : <h2>No hay valoraciones</h2>}
             {reviews?.map((review) => {
                 return (
                     <div className="review">

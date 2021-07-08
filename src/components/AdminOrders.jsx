@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllOrders } from '../state/allOrders'
@@ -11,7 +10,7 @@ export default function AdminOrders() {
 
     useEffect(() => {
         dispatch(setAllOrders())
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

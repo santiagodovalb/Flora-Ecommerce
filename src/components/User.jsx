@@ -1,21 +1,20 @@
 import React from "react";
 import { useEffect } from "react";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import axios from "axios";
 import "../styles/User.css";
 import OrderHistory from "./OrderHistory";
+import { useDispatch } from 'react-redux'
+import {setUserOrders} from '../state/userOrders'
 
 export default function User() {
-  const [orders, setOrders] = useState([]);
+  
+  const orders = useSelector(state => state.userOrders)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    axios
-      .get("/api/shop/order")
-      .then((res) => res.data)
-      .then((ord) => setOrders(ord));
-  }, []);
+    dispatch(setUserOrders())
+  }, [dispatch])
 
   const user = useSelector((state) => state.user);
   const history = useHistory();

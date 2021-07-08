@@ -6,9 +6,7 @@ import SingleProduct from "../components/SingleProduct";
 import Cart from "../components/Cart";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
 import Search from "../components/Search";
 import axios from "axios";
 import { setUser } from "../state/user";
@@ -39,9 +37,8 @@ function App() {
         console.log("err", err);
         return err;
       });
-  }, []);
+  }, [dispatch]);
 
-  const products = useSelector((state) => state.products);
 
   return (
     <div className="App">

@@ -21,7 +21,7 @@ export default function AdminProducts() {
 
     useEffect(() => {
         dispatch(setProducts())
-    }, [])
+    }, [dispatch])
 
     const handleChange = (e) => {
         setProductForm({...productForm, [e.target.name]: e.target.value})
@@ -77,31 +77,3 @@ export default function AdminProducts() {
         </div>
     )
 }
-
-{/* <form id='addProduct' onSubmit={handleSubmit} style={{display: 'none'}}>
-                <label type="text" for='nombre'>Nombre:</label>
-                <input onChange={handleChange} name='nombre'></input>
-
-                <label type="text" for='precio'>Precio:</label>
-                <input onChange={handleChange} name='precio'></input>
-
-                <label type="text" for='imagen'>URL Imagen:</label>
-                <input onChange={handleChange} name='imagen'></input>
-
-                <label for='descripcion'>Descripcion:</label>
-                <input onChange={handleChange} type='text' name='descripcion'></input>
-
-                <label for='stock'>Stock:</label>
-                <input onChange={handleChange} type="text" name='stock'></input>
-
-                <label for='categoria'>Categoria:</label>
-                <select onChange={handleChange} name='CategoryId'>
-                    <option>Seleccionar categoria</option>
-                    {categories.map(categorie => {
-                        return (
-                            <option value={categorie.id}>{categorie.type}</option>
-                        )
-                    })}
-                </select>
-                <button type='submit'>Añadir producto</button>
-            </form> */}
